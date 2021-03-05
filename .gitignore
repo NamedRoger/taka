@@ -1,6 +1,11 @@
 
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,node
+=======
+# Created by https://www.toptal.com/developers/gitignore/api/node,vscode
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,vscode
+>>>>>>> de9aca397e0dcfe5b46e53db0af8d3b32d7e4aa1
 
 ### Node ###
 # Logs
@@ -124,4 +129,8 @@ dist
 !.vscode/extensions.json
 *.code-workspace
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/vscode,node
+=======
+# End of https://www.toptal.com/developers/gitignore/api/node,vscode
+>>>>>>> de9aca397e0dcfe5b46e53db0af8d3b32d7e4aa1
