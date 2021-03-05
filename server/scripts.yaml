@@ -1,0 +1,4 @@
+env: 
+  PORT: 3000
+scripts: 
+  start: deno run --allow-net --allow-env server.ts

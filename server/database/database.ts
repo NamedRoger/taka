@@ -1,4 +1,4 @@
-import { Database, MySQLConnector, from 'https://deno.land/x/denodb/mod.ts';
+import { Database, MySQLConnector} from 'https://deno.land/x/denodb/mod.ts';
 
 const connector = new MySQLConnector({
   database: 'my-database',
