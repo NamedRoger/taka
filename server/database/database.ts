@@ -37,7 +37,7 @@ class Database {
     
   }
 
-  public async execute(query:string, params:[]){
+  public async execute(query:string, params:any[] = []){
       if(this.connection === undefined) throw new Error("No existe la conexion");
 
       const result = await this.connection.execute(query,params);
