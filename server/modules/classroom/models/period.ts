@@ -1,5 +1,5 @@
 export interface IPeriod {
-    idPerid?: number,
+    idPeriod?: number,
     name: string,
     code: string,
     initDate: Date,
