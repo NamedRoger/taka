@@ -1,2 +1,6 @@
+import calssroomRouter from './classroom/routes/classroomRoutes.ts';
 
-const routes = [];
+export {
+    calssroomRouter
+}
+

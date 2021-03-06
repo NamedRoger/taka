@@ -6,4 +6,4 @@ env:
   DATABASE_PASSWORD: 5jO9w_ML!.b?
   DATABASE_DB: taka
 scripts: 
-  start: deno run --allow-net --allow-env server.ts
+  start: deno run --allow-net --allow-env --inspect server.ts

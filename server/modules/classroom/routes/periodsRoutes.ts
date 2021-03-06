@@ -1,13 +1,21 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
+import {
+    getPeriods,
+    addPeriod,
+    desactivePeriod,
+    getPeriod,
+    updatePeriod
 
-export const periodsRoutes = (router:Router) => {
-    router.get('/periods');
+} from '../controllers/periods/periodsController.ts';
 
-    router.get('/periods/:idPeriod');
+export default  (router:Router) => {
+    router.get('/periods',getPeriods);
 
-    router.post('/periods');
+    router.get('/periods/:idPeriod',getPeriod);
 
-    router.put('/periods/:idPeriod');
+    router.post('/periods',addPeriod);
 
-    router.delete('/periods/:idPeriod');
+    router.put('/periods/:idPeriod',updatePeriod);
+
+    router.delete('/periods/:idPeriod',desactivePeriod);
 }

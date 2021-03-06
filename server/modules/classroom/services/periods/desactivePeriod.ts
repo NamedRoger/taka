@@ -1,11 +1,11 @@
 import database from '../../../../database/database.ts';
 
 const table = "periodos";
-const query = `
-UPDATE ${table} activo = ?
-WHERE idPeriod = ?
+const query = (idPeriod:number) => `
+UPDATE ${table} SET activo = ${false} WHERE id_periodo = ${idPeriod}
 `;
 
 export default async (idPeriod:number) => {
-    const result = await database.execute(query,[false,idPeriod]);
+    const result = await database.execute(query(idPeriod));
+    return result;
 }

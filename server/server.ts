@@ -1,5 +1,6 @@
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application,isHttpError,Status } from "https://deno.land/x/oak/mod.ts";
 import database from './database/database.ts';
+import { calssroomRouter } from './modules/routes.ts'
 
 
 const app = new Application();
@@ -20,5 +21,14 @@ app.use(async (ctx, next) => {
   ctx.response.headers.set("X-Response-Time", `${ms}ms`);
 });
 
+app.addEventListener("error", (evt) => {
+  // Will log the thrown error to the console.
+  console.log(evt.error);
+});
+
+app.use(calssroomRouter.routes());
+app.use(calssroomRouter.allowedMethods());
+
 
 await app.listen({ port });
+

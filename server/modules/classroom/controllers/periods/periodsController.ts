@@ -5,8 +5,8 @@ import updatePeriod from './updatePeriod.ts';
 import desactivePeriod from './desactivePeriod.ts';
 
 export {
-    getPeriod,
     getPeriods,
+    getPeriod,
     addPeriod,
     desactivePeriod,
     updatePeriod

@@ -13,7 +13,9 @@ class Database {
       hostname: Deno.env.get('DATABASE_HOST'),
       username: Deno.env.get('DATABASE_USER'),
       db: Deno.env.get('DATABASE_DB'),
+      poolSize:3,
       password:  Deno.env.get('DATABASE_PASSWORD'),
+      timeout:60000
     });
     this.connection = client;
   }
