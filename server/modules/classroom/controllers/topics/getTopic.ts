@@ -2,7 +2,7 @@ import { getTopicByCode,getTopicById } from '../../services/topics/topicsService
 import {Topic } from '../../models/topic.ts';
 
 
-export const getTopic =  async ({params, response }:{ params:any,response: any }) => {
+export const getTopic =  async ({request,params, response }:{request:any,params:any,response: any }) => {
     try{
         let idOrCode:any;
         let topic:Topic;
