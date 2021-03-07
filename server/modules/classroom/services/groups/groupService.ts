@@ -1,11 +1,11 @@
-import getgroup from './getgroup.ts';
-import {getGrupoById } from './getgroup.ts';
+import getGroups from './getGroups.ts';
+import { getGrupoById } from './getGroup.ts';
 import addGroup from './addGroup.ts';
-import updategroup from './updategroup.ts';
-import desactivegroup from './desactivegroup.ts';
+import updategroup from './updateGroup.ts';
+import desactivegroup from './desactiveGroup.ts';
 
 export {
-    getgroup,
+    getGroups,
     getGrupoById,
     addGroup, 
     updategroup,

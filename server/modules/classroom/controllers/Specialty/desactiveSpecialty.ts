@@ -2,7 +2,7 @@ import { desactiveSpecialty } from '../../services/specialties/specialtieService
 
 export default async ({params, response }:{ params:any,response: any }) => {
     try{
-        const res = await desactiveSpecialty(Number(params.idSpecialty));
+        const res = await desactiveSpecialty(Number(params.idSpeciality));
         response.status = 204;
     }catch(e){
         response.status = 400;

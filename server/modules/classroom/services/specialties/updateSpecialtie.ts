@@ -3,8 +3,8 @@ import { Specialty } from '../../models/specialty.ts';
 
 const table = "especialidades";
 const query = ({name,code,idSpecialty}:Specialty) => `
-UPDATE ${table} SET nombre = ${name}, codigo =${code} 
-WHERE idSpecialty = ${idSpecialty}
+UPDATE ${table} SET nombre = '${name}', codigo ='${code}'
+WHERE id_especialidad = ${idSpecialty}
 `;
 
 export default async ({code,name,idSpecialty}:Specialty) => {

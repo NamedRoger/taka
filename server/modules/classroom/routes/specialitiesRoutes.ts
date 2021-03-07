@@ -16,5 +16,5 @@ export default  (router:Router) => {
 
     router.put('/specialities/:idSpeciality',updateSpecialty);
 
-    router.delete('/specialities/:idspeciality',desactiveSpecialty);
+    router.delete('/specialities/:idSpeciality',desactiveSpecialty);
 }

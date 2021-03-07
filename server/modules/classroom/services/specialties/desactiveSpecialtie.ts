@@ -2,7 +2,7 @@ import database from '../../../../database/database.ts';
 
 const table = "especialidades";
 const query = (idSpecialty:number) => `
-UPDATE FROM ${table}
+UPDATE ${table}
 SET activo = ${false}
 WHERE id_especialidad = ${idSpecialty}
 `;

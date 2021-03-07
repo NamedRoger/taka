@@ -4,7 +4,7 @@ import { Specialty} from '../../models/specialty.ts';
 
 export default async ({params, response }:{ params:any,response: any }) => {
     try{
-        const res:Specialty = await getSpecialtyById(Number(params.idSpecialty));
+        const res:Specialty = await getSpecialtyById(Number(params.speciality));
 
         response.status = 200;
         response.body = res;
