@@ -1,6 +1,6 @@
-import getgroup from './getgroup.ts';
-import getgroups from './getgroups.ts';
-import addgroup from './addgroup.ts';
+import getgroup from './getGroup.ts';
+import getgroups from './getGroups.ts';
+import addgroup from './addGroup.ts';
 import updateGroup from './updateGroup.ts';
 import desactiveGroup from './desactiveGroup.ts';
 

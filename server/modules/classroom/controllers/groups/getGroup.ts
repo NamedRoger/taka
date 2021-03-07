@@ -1,10 +1,10 @@
-import { getGroupById } from '../../services/getgroup/getGroupById.ts';
-import {Grupo } from '../../models/Group.ts';
+import { getGrupoById } from '../../services/groups/groupService.ts';
+import {Group } from '../../models/groups.ts';
 
 
 export default async ({params, response }:{ params:any,response: any }) => {
     try{
-        const res:Grupo = await getGroupById(Number(params.idGroup));
+        const res:Group = await getGrupoById(Number(params.idGroup));
 
         response.status = 200;
         response.body = res;
