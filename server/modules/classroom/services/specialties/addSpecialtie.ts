@@ -3,13 +3,13 @@ import {Specialty} from '../../models/specialty.ts';
 
 const table = "especialidades";
 
-const query = `
+const query = ({name,code,active}:Specialty) => `
 INSERT INTO ${table} (nombre,codigo,activo) 
-VALUES (?,?,?)
+VALUES ('${name}','${code}',${active})
 `;
 
 export default async ({code,name,active}:Specialty) => {
-    const result = await database.execute(query,[name,code,active]);
+    const result = await database.execute(query({name,code,active}));
     if(result.affectedRows === 0) throw Error("No se insertó ningun registro");
     return result;
 }

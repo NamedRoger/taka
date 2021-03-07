@@ -1,10 +1,10 @@
-import { getSpecialtyById } from '../../services/specialty/specialtyService.ts';
-import {idSpecialty } from '../../models/specialtyService.ts';
+import { getSpecialtyById } from '../../services/specialties/specialtieService.ts';
+import { Specialty} from '../../models/specialty.ts';
 
 
 export default async ({params, response }:{ params:any,response: any }) => {
     try{
-        const res:idSpecialty = await getSpecialtyById(Number(params.idSpecialty));
+        const res:Specialty = await getSpecialtyById(Number(params.idSpecialty));
 
         response.status = 200;
         response.body = res;

@@ -1,5 +1,5 @@
 export interface Specialty {
-    idSpecialty:number,
+    idSpecialty?:number,
     name:string,
     code:string,
     active?:boolean

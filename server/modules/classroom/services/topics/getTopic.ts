@@ -24,11 +24,11 @@ WHERE codigo = '${code}'
 
 
 export const getTopicById = async (idTopic:number) => {
-    const period = await database.query(queryById(idTopic));
-    return period[0];
+    const topic = await database.query(queryById(idTopic));
+    return topic[0];
 }
 
 export const getTopicByCode = async (code:string) => {
-    const period = await database.query(queryByCode(code.toUpperCase()));
-    return period[0];
+    const topic = await database.query(queryByCode(code.toUpperCase()));
+    return topic[0];
 }

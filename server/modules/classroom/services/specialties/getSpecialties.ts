@@ -2,9 +2,13 @@ import database from '../../../../database/database.ts';
 
 const table = "especialidades";
 const query = `
-SELECT id_especialidad, nombre, codigo, activo
+SELECT 
+    id_especialidad as idSpecialty, 
+    nombre as name, 
+    codigo as code, 
+    activo as active
 FROM ${table}
-WHERE active = ${true}
+WHERE activo = ${true}
 `;
 
 export default async () => {
