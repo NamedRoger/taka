@@ -1,4 +1,4 @@
-export interface Student {
+export interface StudentCalss {
     idStudent:number,
     idCalss:number,
     parcial1:number,
