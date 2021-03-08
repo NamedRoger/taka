@@ -4,7 +4,7 @@ import {Group } from '../../models/groups.ts';
 
 export default async ({params, response }:{ params:any,response: any }) => {
     try{
-        const res:Group = await getGrupoById(Number(params.idGroup));
+        const res:Group = await getGrupoById(Number(params.group));
 
         response.status = 200;
         response.body = res;

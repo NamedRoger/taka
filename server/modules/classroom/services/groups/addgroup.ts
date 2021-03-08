@@ -5,7 +5,7 @@ const table = "grupos";
 
 const query = ({name,code}:Group) => `
 INSERT INTO ${table} (nombre, codigo) 
-VALUES ('${name}',${code})
+VALUES ('${name}','${code}')
 `;
 
 export default async ({name,code}:Group) => {
