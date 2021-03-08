@@ -1,6 +1,6 @@
 import { Application,isHttpError,Status } from "https://deno.land/x/oak/mod.ts";
 import database from './database/database.ts';
-import { calssroomRouter } from './modules/routes.ts'
+import { calssroomRouter,authRouter } from './modules/routes.ts'
 
 
 
@@ -25,6 +25,9 @@ app.use(async (ctx, next) => {
 
 app.use(calssroomRouter.routes());
 app.use(calssroomRouter.allowedMethods());
+
+app.use(authRouter.routes());
+app.use(authRouter.allowedMethods());
 
 
 await app.listen({ port });
