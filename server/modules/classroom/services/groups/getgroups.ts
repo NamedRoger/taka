@@ -2,11 +2,15 @@ import database from '../../../../database/database.ts';
 
 const table = "grupos";
 const query = `
-SELECT id_grupo as idGrupo, 
-    nombre as name,
-    codigo as code
-FROM ${table}
-WHERE activo = ${true}
+SELECT
+    g.id_grupo as idGrupo,
+    g.nombre as name,
+    g.codigo as code,
+    g.id_especialidad as idSpeciality,
+    es.nombre as speciality
+FROM ${table} as g
+INNER JOIN especialidades as es ON es.id_especialidad = g.id_especialidad
+WHERE g.activo = ${true} AND es.activo = ${true}
 `;
 
 export default async () => {

@@ -3,13 +3,13 @@ import { Group } from '../../models/groups.ts';
 
 const table = "grupos";
 
-const query = ({name,code}:Group) => `
-INSERT INTO ${table} (nombre, codigo) 
-VALUES ('${name}','${code}')
+const query = ({name,code,idSpeciality}:Group) => `
+INSERT INTO ${table} (nombre, codigo,id_especialidad) 
+VALUES ('${name}','${code}',${idSpeciality})
 `;
 
-export default async ({name,code}:Group) => {
-    const result = await database.execute(query({name,code}));
+export default async ({name,code,idSpeciality}:Group) => {
+    const result = await database.execute(query({name,code,idSpeciality}));
     if(result.affectedRows === 0) throw Error("No se insertó ningun registro");
     return result;
 }

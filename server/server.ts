@@ -1,9 +1,7 @@
 import { Application,isHttpError,Status } from "https://deno.land/x/oak/mod.ts";
 import database from './database/database.ts';
 import { calssroomRouter,authRouter } from './modules/routes.ts'
-
-
-
+  
 const app = new Application();
 const port = 8080;
 
