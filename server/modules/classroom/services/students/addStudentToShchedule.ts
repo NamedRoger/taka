@@ -1,5 +1,5 @@
 import database from '../../../../database/database.ts';
-import { StudentSchedule } from '../../models/StudentSchedule.ts';
+import { StudentSchedule } from '../../models/studentSchedule.ts';
 
 const table = "horario_alumno";
 
