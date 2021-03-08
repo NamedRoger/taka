@@ -1,15 +1,14 @@
 import database from '../../../../database/database.ts';
-import { Group } from '../../models/groups.ts';
+import {Schedule} from '../../models/schedule.ts';
+const table = "horario";
 
-const table = "grupos";
-
-const query = ({name,code}:Group) => `
-INSERT INTO ${table} (id_periodo, id_grupo) 
-VALUES ('${name}','${code}')
+const query = ({name,group,period,active}:Schedule) => `
+INSERT INTO ${table} (id_grupo,id_periodo,activo) 
+VALUES (${group.idGroup},${period.idPeriod},${active})
 `;
 
-export default async ({name,code}:Group) => {
-    const result = await database.execute(query({name,code}));
+export default async ({group,period,active,name}:Schedule) => {
+    const result = await database.execute(query({group,period,active,name}));
     if(result.affectedRows === 0) throw Error("No se insertó ningun registro");
     return result;
 }
