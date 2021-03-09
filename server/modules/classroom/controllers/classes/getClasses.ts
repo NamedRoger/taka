@@ -1,8 +1,8 @@
-import { getClasses } from '../../services/getClasses/classService.ts';
+import { getClass } from '../../services/classes/classServices.ts';
 
 export default async ({ response }: { response: any }) => {
     try{
-        const classes = await getClasses();
+        const classes = await getClass();
 
         response.status = 200;
         response.body = classes;

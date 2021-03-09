@@ -1,5 +1,5 @@
 import {Class } from '../../models/class.ts';
-import { addClass } from '../../services/addclass/classService.ts';
+import { addClass } from '../../services/classes/classServices.ts';
 
 export default async ({ request,response }: {request:any, response: any }) => {
     const body = await request.body({type:"json"});
@@ -19,16 +19,9 @@ export default async ({ request,response }: {request:any, response: any }) => {
 }
 
 const dataToClass = (data:any):Class => ({
-    active:data.active,
-    group:{
-        idGroup:Number(data.idGroup),
-        name:"",
-        code:""
-    },
-    period:{
-        idPeriod:Number(data.idPeriod),
-        name:"",
-        finishDate:new Date(),
-        initDate:new Date()
-    }
+    idSchecule:Number(data.idSchedule),
+    idTeacher:Number(data.idTeacher),
+    idTopic:Number(data.idTopic),
+    name:data.name,
+    active:true
 });

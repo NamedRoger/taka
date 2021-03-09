@@ -1,4 +1,4 @@
-import { desactiveClass } from '../../services/class/classService.ts';
+import { desactiveClass } from '../../services/classes/classServices.ts';
 
 export default async ({ response,params }: { response: any,params:any }) => {
 
