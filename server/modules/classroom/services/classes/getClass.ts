@@ -3,13 +3,11 @@ const table = 'clase';
 
 const queryById = (idClase:number) => `
 SELECT
-    id_clase as idClase,
+    id_clase as idClass,
     nombre as name,
-    id_materia as materia,
+    id_materia as idTopuc,
     id_maestro as idTeacher,
-    fecha_fin as finishDate,
-    fecha_inicio as initDate,
-    id_horario as schedule,
+    id_horario as idSchedule,
     activo as active
 FROM ${table}
 WHERE id_clase = ${idClase}
