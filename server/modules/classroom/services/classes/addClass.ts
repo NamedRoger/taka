@@ -1,14 +1,14 @@
 import database from '../../../../database/database.ts';
-import {Schedule} from '../../models/schedule.ts';
+import {Class} from '../../models/class.ts';
 const table = "clase";
 
-const query = ({name,group,period,active}:Schedule) => `
-INSERT INTO ${table} (nombre,id_materia,activo) 
-VALUES (${group.idGroup},${period.idPeriod},${active})
+const query = ({name,materia, idTeacher, finishDate,initDate,schedule,active}:idClase) => `
+INSERT INTO ${table} (nombre, id_materia, id_maestro, hora_inicio, hora_fin, activo, id_horario) 
+VALUES (${name.nombre},${materia.id_materia},${idTeacher.id_materia},${initDate.hora_inicio},${finishDate.hora_fin},${schedule.id_horario}${active})
 `;
 
-export default async ({group,period,active,name}:Schedule) => {
-    const result = await database.execute(query({group,period,active,name}));
+export default async ({name,materia, idTeacher, finishDate,initDate,schedule,active}:idClase) => {
+    const result = await database.execute(query({name,materia, idTeacher, finishDate,initDate,schedule,active}));
     if(result.affectedRows === 0) throw Error("No se insertó ningun registro");
     return result;
 }
