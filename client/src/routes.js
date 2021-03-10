@@ -16,8 +16,7 @@ export const Routes = {
     Lock: { path: "/examples/lock" },
     NotFound: { path: "/examples/404" },
     ServerError: { path: "/examples/500" },
-    Especialidad: { path: "/especialidad" },
-    Materias: { path: "/materias" },
+
 
     // docs
     DocsOverview: { path: "/documentation/overview" },
@@ -47,7 +46,10 @@ export const Routes = {
     Tooltips: { path: "/components/tooltips" },
     Toasts: { path: "/components/toasts" },
     WidgetsComponent: { path: "/components/widgets" },
+
+    Especialidad: { path: "/classroom/especialidades" },
+    Materias: { path: "/classroom/materias" },
     Periodos: {
-        path:"/periodos"
+        path:"/classroom/periodos"
     }
 };

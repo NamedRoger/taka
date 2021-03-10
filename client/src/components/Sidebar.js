@@ -100,6 +100,9 @@ export default (props = {}) => {
 
               <CollapsableNavItem eventKey="classroom/" title="Classroom" icon={faTable}>
                 <NavItem title="Periodos" link={Routes.Periodos.path} />
+                <NavItem title="Especialidades" link={Routes.Especialidad.path} />
+                <NavItem title="Materias" link={Routes.Materias.path} />
+
               </CollapsableNavItem>
 
               <CollapsableNavItem eventKey="administracion/" title="Administracion" icon={faTable}>
