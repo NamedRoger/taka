@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as serviceEspecialidades  from '../../../services/especialidades.js';
 
+const getEspecialidades = async () => {
+    let especialidades = [];
+    try{
+        especialidades = await serviceEspecialidades.getEspecialidades();
+        return especialidades;
+    }catch(e){
+        return especialidades;
+    }
+}
 
 const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
+    const [especialidades,setEspecialidades] = useState([]);
+
+    
     return(
         <>
             <form onSubmit={onSubmit}>
@@ -26,7 +39,8 @@ const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
 
                 <div className="form-group mt-2">
                     <input type="submit"
-                    className="btn btn-success btn-sm">
+                    className="btn btn-success btn-sm"
+                    value="Guardar">
                     </input>
 
                     <button className="btn btn-danger btn-sm" 

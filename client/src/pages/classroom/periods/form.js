@@ -32,7 +32,8 @@ const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
 
                 <div className="form-group mt-2">
                     <input type="submit"
-                    className="btn btn-success btn-sm">
+                    className="btn btn-success btn-sm"
+                    value="Guardar">
                         
                     </input>
                     <button className="btn btn-danger btn-sm" 

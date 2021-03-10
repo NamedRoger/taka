@@ -4,6 +4,7 @@ import HeaderPage from '../../../components/HeaderPage';
 import FormGrupos from './form';
 import TablaGrupos from './tabla';
 import * as serviceGrupos  from '../../../services/grupos.js';
+import * as serviceEspecialidades  from '../../../services/especialidades.js';
 
 const getGrupos = async () => {
     let grupos = [];
@@ -14,6 +15,8 @@ const getGrupos = async () => {
         return grupos;
     }
 }
+
+
 
 const Grupos = () => {
     const initGrupo = {
@@ -32,7 +35,10 @@ const Grupos = () => {
     }
 
     useEffect(() => {
-        (async() => setGrupos(await getGrupos()))();
+        (async() => {
+            setGrupos(await getGrupos());
+
+        })();
     },[]);
 
     const onSelect = ({id,operation}) => {
