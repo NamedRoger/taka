@@ -1,11 +1,11 @@
 import React, { useState} from 'react';
 import { Col, Row, Container } from '@themesberg/react-bootstrap';
 import HeaderPage from '../../../components/HeaderPage';
-import TablaEspecialidad from './TablaEspecialidad';
-import FormEspecialidad from './Form';
+import TablaMaterias from './TablaMaterias';
+import FormMaterias from './Form';
 
 export default function Especialidad() {
-    const [especialidad, setEspecialidad] = useState([]);
+    const [materias, setMaterias] = useState([]);
     const [nuevo, setNuevo] = useState('');
 
     const handleChange = (e) => {
@@ -24,14 +24,14 @@ export default function Especialidad() {
     return (
         <>
         <Container>
-            <HeaderPage title={"Especialidad"}></HeaderPage>
+            <HeaderPage title={"Materias"}></HeaderPage>
             <Row>
                 <Col>
-                    <FormEspecialidad {...Props} />
+                    <FormMaterias {...Props} />
                 </Col>
             </Row>
             <div className="mt-4">
-            <TablaEspecialidad data={especialidad} />
+            <TablaMaterias data={materias} />
             </div>
         </Container>
         </>
