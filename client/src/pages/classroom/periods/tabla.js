@@ -3,24 +3,35 @@ import React from 'react';
 import Pagination from '../../../components/Pagination';
 import PropTypes from 'prop-types';
 import {Table} from '@themesberg/react-bootstrap'
+import dayjs from 'dayjs';
 
 const TablaPeriodos = (props) => {
-    const {data} = props; 
+    const {data,onClick} = props; 
 
     const totalRows = data.length;
+
+    const handleClick = ({id,operation}) => {
+        onClick({id,operation});
+    }
     
     const TableRow = (props) => {
         const {periodo} = props;
         return(
             <tr>
                 <td>{periodo.name}</td>
-                <td>{periodo.initDate}</td>
-                <td>{periodo.finishDate}</td>
+                <td>{dayjs(`${periodo.initDate?periodo.initDate:null}`).format('DD/MM/YY')}</td>
+                <td>{dayjs(`${periodo.initDate?periodo.finishDate:null}`).format('DD/MM/YY')}</td>
                 <td>
-                    <button>
+                    <button className="btn-primary" onClick={() => handleClick({
+                        id:periodo.idPeriod,
+                        operation:'edit'
+                    })}>
                         editar
                     </button>
-                    <button>
+                    <button className="btn-danger" onClick={() => handleClick({
+                        id:periodo.idPeriod,
+                        operation:'delete'
+                    })}>
                         borrar
                     </button>
                 </td>
