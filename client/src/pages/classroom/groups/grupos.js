@@ -4,7 +4,6 @@ import HeaderPage from '../../../components/HeaderPage';
 import FormGrupos from './form';
 import TablaGrupos from './tabla';
 import * as serviceGrupos  from '../../../services/grupos.js';
-import * as serviceEspecialidades  from '../../../services/especialidades.js';
 
 const getGrupos = async () => {
     let grupos = [];
