@@ -49,6 +49,7 @@ export const Routes = {
 
     Especialidad: { path: "/classroom/especialidades" },
     Materias: { path: "/classroom/materias" },
+    Grupos: { path: "/classroom/grupos" },
     Periodos: {
         path:"/classroom/periodos"
     }

@@ -16,18 +16,16 @@ const getPeriodos = async () => {
     return periodos;
 }
 
-
-
 const Periodos = () => {
-    const [periodos,setPeriodos] = useState([]);
-    const [periodo,setPeriodo] = useState({
+    const initPeriodo = {
         idPeriod:0,
         name:'',
         initDate:'',
         finishDate:''
-    });
+    }
+    const [periodos,setPeriodos] = useState([]);
+    const [periodo,setPeriodo] = useState(initPeriodo);
 
-    getPeriodos();
 
     const onEdtiPeriodo = async (id) => {
         const periodo = periodos.find(p => p.idPeriod === id);
@@ -60,8 +58,22 @@ const Periodos = () => {
         }
     }
 
-    const handleSubmit = (periodo) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         console.log(periodo);
+    }
+
+    
+    const setValue = (input)  => {
+        const key = input.name;
+        setPeriodo({
+            ...periodo,
+            [key]:input.value
+        });
+    }
+
+    const onReset = () => {
+        setPeriodo(initPeriodo);
     }
 
     return (
@@ -69,7 +81,7 @@ const Periodos = () => {
             <HeaderPage title={"Periodos"}></HeaderPage>
             <Row>
                 <Col>
-                    <FormPeriodos data={periodo} onSubmit={handleSubmit}></FormPeriodos>
+                    <FormPeriodos data={periodo} onSubmit={handleSubmit} onChage={setValue} onReset={onReset}></FormPeriodos>
                 </Col>
             </Row>
             <div className="mt-4">

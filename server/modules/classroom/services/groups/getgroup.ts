@@ -3,7 +3,7 @@ const table = 'grupos';
 
 const queryById = (idGrupo:number) => `
 SELECT
-    id_grupo as idGrupo,
+    id_grupo as idGroup,
     nombre as name,
     codigo as code,
     id_especialidad as idSpeciality,

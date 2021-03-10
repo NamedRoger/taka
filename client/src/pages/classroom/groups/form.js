@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
+const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
     return(
         <>
             <form onSubmit={onSubmit}>
@@ -14,27 +14,21 @@ const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
                 </div>
 
                 <div className="form-group">
-                    <label>Fecha Inicio</label>
-                    <input type="date" 
-                    className="form-control"
-                    name="initDate"
-                    value={data.initDate}
-                    onChange={(e) => {onChage(e.target)}}/>
-                </div>
+                    <label>Especialidad</label>
+                    <select  className="form-control" 
+                    name="idSpeciality"
+                    value={data.name} 
+                    onChange={(e) => {onChage(e.target)}}>
+                        <option value={0}>-- Selecciona una especialidad --</option>
 
-                <div className="form-group">
-                    <label>Fecha Fin</label>
-                    <input type="date" className="form-control"
-                    name="finishDate"
-                    value={data.finishDate}
-                    onChange={(e) => {onChage(e.target)}}/>
+                    </select>
                 </div>
 
                 <div className="form-group mt-2">
                     <input type="submit"
                     className="btn btn-success btn-sm">
-                        
                     </input>
+
                     <button className="btn btn-danger btn-sm" 
                     type="reset"
                     onClick={onReset}>
@@ -47,4 +41,4 @@ const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
     );
 }
 
-export default FormPeriodos;
+export default FormGrupos;

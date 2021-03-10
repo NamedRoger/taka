@@ -3,7 +3,7 @@ import database from '../../../../database/database.ts';
 const table = "grupos";
 const query = `
 SELECT
-    g.id_grupo as idGrupo,
+    g.id_grupo as idGroup,
     g.nombre as name,
     g.codigo as code,
     g.id_especialidad as idSpeciality,
