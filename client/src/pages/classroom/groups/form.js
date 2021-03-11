@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import * as serviceEspecialidades  from '../../../services/especialidades.js';
 
 const getEspecialidades = async () => {
@@ -13,8 +13,13 @@ const getEspecialidades = async () => {
 
 const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
     const [especialidades,setEspecialidades] = useState([]);
+    useEffect(() => {
+        (async () => {
+            setEspecialidades(await getEspecialidades());
+        })();
+    },[]);
 
-    
+
     return(
         <>
             <form onSubmit={onSubmit}>
@@ -30,10 +35,10 @@ const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
                     <label>Especialidad</label>
                     <select  className="form-control" 
                     name="idSpeciality"
-                    value={data.name} 
+                    value={data.idSpeciality} 
                     onChange={(e) => {onChage(e.target)}}>
                         <option value={0}>-- Selecciona una especialidad --</option>
-
+                        {especialidades.map(e => <option key={e.idSpecialty} value={e.idSpecialty}>{e.name}</option>)}
                     </select>
                 </div>
 

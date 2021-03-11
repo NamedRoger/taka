@@ -6,38 +6,45 @@ import {Table} from '@themesberg/react-bootstrap'
 const TablaEspecialidad = (props) => {
     const {data} = props; 
     const totalRows = data.length;
-    const TableRow = ({column}) => {
-        const TableRow = (props) => {
-            const {especialidad} = props;
-            return(
-                <tr>
-                    <td>{especialidad.name}</td>
-                    <td>
-                        <button>
-                            editar
-                        </button>
-                        <button>
-                            borrar
-                        </button>
-                    </td>
-                </tr>
-            );
-        }
+
+    const TableRow = (props) => {
+        const {materias} = props;
+        return(
+            <tr>
+                <td>{materias.name}</td>
+                <td>
+                    <button className="btn-primary"
+                    onClick={() => {
+                        
+                    }}>
+                        editar
+                    </button>
+                    <button className="btn-danger"
+                    onClick={() => {
+                        
+                    }}>
+                        borrar
+                    </button>
+                </td>
+            </tr>
+        );
     }
 
     return (
     <>
         <Table responsive>
             <thead>
-            <tr>
-                    <td>Nombre</td>
+                <tr>
+                    <td>Materia</td>
+                    <td>Código</td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
-              {data.map((d,i)=> <TableRow key={i} periodo={d} />)}  
+                {data.map((d, i) => <TableRow key={i} periodo={d} />)}
             </tbody>
-            </Table>
-        <Pagination totalRecords={totalRows} pageLimit={1} pageNeighbours={1}/>
+        </Table>
+        <Pagination totalRecords={totalRows} pageLimit={20} pageNeighbours={1}/>
     </>
     );
     

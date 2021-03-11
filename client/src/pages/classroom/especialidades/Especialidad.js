@@ -1,37 +1,86 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import { Col, Row, Container } from '@themesberg/react-bootstrap';
 import HeaderPage from '../../../components/HeaderPage';
 import TablaEspecialidad from './TablaEspecialidad';
 import FormEspecialidad from './Form';
+import * as serviceEspecialidades  from '../../../services/especialidades.js';
+
+const getEspecialidades = async () => {
+    let especialidades = [];
+    try{
+        especialidades = await serviceEspecialidades.getEspecialidades();
+        return especialidades;
+    }catch(e){
+        return especialidades;
+    }
+}
+
 
 export default function Especialidad() {
-    const [especialidad, setEspecialidad] = useState([]);
-    const [nuevo, setNuevo] = useState('');
+    const initEspecialidad = {
+        idSpecialty:0,
+        name:'',
+    }
+    const [especialidades, setEspecialidades] = useState([]);
+    const [especialidad, setEspecialidad] = useState(initEspecialidad);
 
-    const handleChange = (e) => {
-        setNuevo(e.target.value);
+    useEffect(() => {
+        (async () => {
+            await setEspecialidades(await getEspecialidades());
+        })();
+    },[]);
+
+    const setValue = (input)  => {
+        const key = input.name;
+        setEspecialidad({
+            ...especialidad,
+            [key]:input.value
+        });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(nuevo);
+        console.log(especialidad);
     }
-    const Props = {
-        nuevo,
-        handleChange,
-        handleSubmit
+
+    const onReset = () => {
+        setEspecialidad(initEspecialidad);
     }
+
+    
+    const onEdtiEspecialidad = async (id) => {
+        const especialidad = especialidades.find(p => p.idSpecialty === id);
+        setEspecialidad({
+            ...especialidad
+        });
+
+    }
+
+    const onSelect = ({id,operation}) => {
+        switch(operation){
+            case 'delete':
+                // onDeletePeriodo(id);
+                break;
+            case 'edit':
+                onEdtiEspecialidad(id);
+                break;
+            default:
+                break;
+        }
+    }
+
+
     return (
         <>
         <Container>
             <HeaderPage title={"Especialidad"}></HeaderPage>
             <Row>
                 <Col>
-                    <FormEspecialidad {...Props} />
+                    <FormEspecialidad data={especialidad} onChange={setValue} onSubmit={handleSubmit} onReset={onReset}/>
                 </Col>
             </Row>
             <div className="mt-4">
-            <TablaEspecialidad data={especialidad} />
+            <TablaEspecialidad data={especialidades} onSelect={onSelect}/>
             </div>
         </Container>
         </>

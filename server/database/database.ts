@@ -1,4 +1,4 @@
-import { Client } from "https://deno.land/x/mysql/mod.ts";
+import { Client,Connection } from "https://deno.land/x/mysql/mod.ts";
 
 class Database {
 
@@ -15,9 +15,10 @@ class Database {
       db: Deno.env.get('DATABASE_DB'),
       poolSize:3,
       password:  Deno.env.get('DATABASE_PASSWORD'),
-      timeout:60000
+      timeout:100000
     });
     this.connection = client;
+    
   }
 
   getConnection(){

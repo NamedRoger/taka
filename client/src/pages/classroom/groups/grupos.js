@@ -31,6 +31,7 @@ const Grupos = () => {
         setGrupo({
             ...grupo
         });
+
     }
 
     useEffect(() => {
