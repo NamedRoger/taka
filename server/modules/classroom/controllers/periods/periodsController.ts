@@ -1,8 +1,8 @@
-import getPeriod from './getPeriod.ts';
-import getPeriods from './getPeriods.ts';
-import addPeriod from './addPeriod.ts';
-import updatePeriod from './updatePeriod.ts';
-import desactivePeriod from './desactivePeriod.ts';
+import { IPeriod } from '../../models/period.ts';
+import * as periodsService from '../../services/periods/periodsService.ts';
+
+
+
 
 export {
     getPeriods,
