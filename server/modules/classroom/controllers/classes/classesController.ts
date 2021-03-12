@@ -1,8 +1,5 @@
-import addClass from './addClass.ts';
-import getClasses from './getClasses.ts';
-import getClass from './getClass.ts';
-import updateClass from './updateClass.ts';
-import desactiveClass from './desactiveClass.ts';
+import { Class } from '../../models/Class.ts';
+import * as classService from '../../services/classes/classService.ts';
 
 export {
     addClass,
