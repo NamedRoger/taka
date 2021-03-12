@@ -1,4 +1,4 @@
-import database from '../../../../database/database.ts';
+import database from '../../../../../database/database.ts';
 const table = "horario";
 
 const query = (idSchedule:number) => `

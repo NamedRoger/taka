@@ -1,5 +1,5 @@
-import database from '../../../../database/database.ts';
-import {Schedule} from '../../models/schedule.ts';
+import database from '../../../../../database/database.ts';
+import {Schedule} from '../../../models/schedule.ts';
 const table = "horario";
 
 const query = ({group,period,idSchedule}:Schedule) => `

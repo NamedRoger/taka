@@ -1,7 +1,7 @@
-import database from '../../../../database/database.ts';
+import database from '../../../../../database/database.ts';
 const table = "horario";
 
-const query = () => `
+const query = (idSchedule:number) => `
 SELECT 
     h.id_horario as idSchedule,
     h.id_periodo as idPeriod,
@@ -12,11 +12,10 @@ SELECT
 FROM ${table} as h 
 INNER JOIN grupos as g ON g.id_grupo = h.id_grupo
 INNER JOIN periodos as p ON p.id_periodo = h.id_periodo
-WHERE h.activo = ${true} AND p.activo = ${true} AND g.activo = ${true}
-ORDER BY h.id_horario DESC 
+WHERE h.id_horario = ${idSchedule}
 `;
 
-export default async () => {
-    const result = await database.query(query());
-    return result;
+export default async (idSchedule:number) => {
+    const result = await database.query(query(idSchedule));
+    return result[0];
 }
