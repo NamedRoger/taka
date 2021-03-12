@@ -62,9 +62,10 @@ const getSchedule = async ({ response,params }: { response: any,params:any }) =>
 }
 
 
-const getSchedules = async ({ response }: { response: any }) => {
+const getSchedules = async ({ response,params }: { response: any, params:any }) => {
+    const {idGroup,idPeriod} = params
     try{
-        const schedules = await scheduleService.getSchedules();
+        const schedules = await scheduleService.getSchedules(idGroup,idPeriod);
 
         response.status = 200;
         response.body = schedules;
