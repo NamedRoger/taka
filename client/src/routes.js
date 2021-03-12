@@ -49,7 +49,12 @@ export const Routes = {
 
     Especialidad: { path: "/classroom/especialidades" },
     Materias: { path: "/classroom/materias" },
-    Grupos: { path: "/classroom/grupos" },
+    Grupos: { 
+        path: "/classroom/grupos",
+        children:{
+            horarios:"/classroom/grupos/:idGrupo/horarios",
+        }
+    },
     Periodos: {
         path:"/classroom/periodos"
     }

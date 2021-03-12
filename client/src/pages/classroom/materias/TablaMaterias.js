@@ -4,24 +4,31 @@ import PropTypes from 'prop-types';
 import {Table} from '@themesberg/react-bootstrap'
 
 const TablaEspecialidad = (props) => {
-    const {data} = props; 
+    console.log(props);
+    const {data,onSelect} = props; 
     const totalRows = data.length;
 
     const TableRow = (props) => {
-        const {materias} = props;
+        const {data} = props;
         return(
             <tr>
-                <td>{materias.name}</td>
+                <td>{data.name}</td>
                 <td>
                     <button className="btn-primary"
                     onClick={() => {
-                        
+                        onSelect({
+                            id:data.idTopic,
+                            operation:'edit'
+                        })
                     }}>
                         editar
                     </button>
                     <button className="btn-danger"
                     onClick={() => {
-                        
+                        onSelect({
+                            id:data.idTopic,
+                            operation:'delete'
+                        })
                     }}>
                         borrar
                     </button>
@@ -41,7 +48,7 @@ const TablaEspecialidad = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map((d, i) => <TableRow key={i} periodo={d} />)}
+                {data.map((d, i) => <TableRow key={i} data={d} />)}
             </tbody>
         </Table>
         <Pagination totalRecords={totalRows} pageLimit={20} pageNeighbours={1}/>

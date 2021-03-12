@@ -23,6 +23,7 @@ import Preloader from "../components/Preloader";
 
 import Periodos from './classroom/periods/periods';
 import Grupos from './classroom/groups/grupos';
+import Horarios from './classroom/groups/horarios/horarios';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -93,6 +94,7 @@ export default () => (
     {/* documentation */}
     <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} />
     <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} />
+    <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} />
 
 
     <Redirect to={Routes.NotFound.path} />

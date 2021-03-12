@@ -4,9 +4,9 @@ import Pagination from '../../../components/Pagination';
 import PropTypes from 'prop-types';
 import {Table} from '@themesberg/react-bootstrap'
 import { Link, Redirect,withRouter } from 'react-router-dom';
-import { Routes } from "../../../routes";
+// import { Routes } from "../../../routes";
 
-const TablaGrupos = (props) => {
+const TablaHorario = (props) => {
     const {data,onClick, history} = props; 
     const totalRows = data.length;
 
@@ -16,7 +16,7 @@ const TablaGrupos = (props) => {
     
     const TableRow = (props) => {
         const {grupo} = props;
-        const linkTo = Routes.Grupos.children.horarios.replace(/:idGrupo/,grupo.idGroup);
+        // const linkTo = Routes.Grupos.children.horarios.replace(/:idGrupo/,grupo.idGroup);
         return(
             <tr>
                 <td>{grupo.name}</td>
@@ -29,11 +29,11 @@ const TablaGrupos = (props) => {
                     })}>
                         editar
                     </button>
-                    <button 
+                    {/* <button 
                     className="btn-secondary"
                     onClick={() => history.push(linkTo)}>
                         horarios
-                    </button>
+                    </button> */}
                     <button className="btn-danger" onClick={() => handleClick({
                         id:grupo.idGroup,
                         operation:'delete'
@@ -50,24 +50,21 @@ const TablaGrupos = (props) => {
         <Table responsive> 
             <thead>
                 <tr>
-                    <td>Grupo</td>
-                    <td>Código</td>
-                    <td>Especialidad</td>
+                    <td>Materia</td>
                     <td></td>
                 </tr>
             </thead>
             <tbody>
-                {data.map(d => <TableRow key={d.idGroup} grupo={d}></TableRow>)}
+                {/* {data.map(d => <TableRow key={d.idGroup} grupo={d}></TableRow>)} */}
             </tbody>
         </Table>
-        <Pagination totalRecords={totalRows} pageLimit={1}  pageNeighbours={1}/>
     </>
     );
     
 }
 
-TablaGrupos.prototype = {
+TablaHorario.prototype = {
     data: PropTypes.array
 }
 
-export default withRouter(TablaGrupos);
+export default withRouter(TablaHorario);
