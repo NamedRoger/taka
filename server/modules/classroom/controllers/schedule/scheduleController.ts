@@ -1,5 +1,5 @@
 import { Schedule } from '../../models/Schedule.ts';
-import * as scheduleService from '../../services/schedule/scheduleService.ts';
+import * as scheduleService from '../../services/groups/schedule/scheduleService.ts';
 
 const addSchedule = async ({ request,response }: {request:any, response: any }) => {
     const body = await request.body({type:"json"});
