@@ -20,7 +20,9 @@ const getPeriod = async ({request,response,params}:{request:any,response:any,par
 }
 
 const addPeriod = async ({request,response}:{request:any,response:any}) => {
-    const newPeriod:IPeriod = request.body;
+    const body = await request.body({type:"json"});
+
+    const newPeriod:IPeriod = await body.value;
     try{
         const res = await periodsService.addPeriod(newPeriod);
         newPeriod.idPeriod = res.lastInsertId;
@@ -35,7 +37,9 @@ const addPeriod = async ({request,response}:{request:any,response:any}) => {
 }
 
 const updatePeriod = async ({request,response,params}:{request:any,response:any,params:any}) => {
-    const newPeriod:IPeriod = request.body;
+    const body = await request.body({type:"json"});
+    const newPeriod:IPeriod = await body.value;
+    
     const id = Number(params.idPeriod);
     try{
         newPeriod.idPeriod = id;
