@@ -9,7 +9,7 @@ import {
 } from '../controllers/periods/periodsController.ts';
 
 export default  (router:Router) => {
-    router.get('/periods',getPeriod);
+    router.get('/periods',getPeriods);
 
     router.get('/periods/:idPeriod',getPeriod);
 

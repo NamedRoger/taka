@@ -1,5 +1,5 @@
 
-import { Group } from '../../models/groups.ts';
+import { Group } from '../../models/group.ts';
 import * as groupService from '../../services/groups/groupService.ts';
 import { generateCode } from '../../../../helpers/index.ts';
 

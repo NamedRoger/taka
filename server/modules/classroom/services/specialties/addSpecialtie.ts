@@ -1,5 +1,5 @@
 import database from '../../../../database/database.ts';
-import {Specialty} from '../../models/specialty.ts';
+import {Specialty} from '../../models/speciality.ts';
 
 const table = "especialidades";
 

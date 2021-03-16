@@ -1,5 +1,5 @@
 import database from '../../../../database/database.ts';
-import { Group } from '../../models/groups.ts';
+import { Group } from '../../models/group.ts';
 
 const table = "grupos";
 const query = ({name,code,idGroup,idSpeciality}:Group) =>`
