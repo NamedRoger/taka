@@ -1,4 +1,4 @@
-import {Group} from './groups.ts'
+import {Group} from './group.ts'
 import {IPeriod} from './period.ts';
 export interface Schedule {
     idSchedule?:number,

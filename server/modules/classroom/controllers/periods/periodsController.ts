@@ -10,21 +10,56 @@ const getPeriod = async ({request,response,params}:{request:any,response:any,par
     const id = Number(params.idPeriod);
     try{
         const period = await periodsService.getPeriodById(id);
-        if(period === undefined || period === null){}
+        response.body = period;
     }catch(e){
+        response.status = 400;
+        response.body = {
+            error:e.message
+        }
     }
 }
 
 const addPeriod = async ({request,response}:{request:any,response:any}) => {
-
+    const newPeriod:IPeriod = request.body;
+    try{
+        const res = await periodsService.addPeriod(newPeriod);
+        newPeriod.idPeriod = res.lastInsertId;
+        response.status = 201;
+        response.body = newPeriod;
+    }catch(e){
+        response.status = 400;
+        response.body = {
+            error:e.message
+        }
+    }
 }
 
 const updatePeriod = async ({request,response,params}:{request:any,response:any,params:any}) => {
-
+    const newPeriod:IPeriod = request.body;
+    const id = Number(params.idPeriod);
+    try{
+        newPeriod.idPeriod = id;
+        await periodsService.updatePeriod(newPeriod);
+        response.status = 204
+    }catch(e){
+        response.status = 400;
+        response.body = {
+            error:e.message
+        }
+    }
 }
 
 const desactivePeriod = async ({request,response,params}:{request:any,response:any,params:any}) => {
-
+    const id = Number(params.idPeriod);
+    try{
+        const res = await periodsService.desactivePeriod(id);
+        response.status = 204
+    }catch(e){
+        response.status = 400;
+        response.body = {
+            error:e.message
+        }
+    }
 }
 
 
