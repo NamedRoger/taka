@@ -1,5 +1,4 @@
 import database from '../../../../database/database.ts';
-import { Specialty } from '../../models/specialty.ts';
 const table = 'especialidades';
 
 const queryById = (idSpecialty:number) => `

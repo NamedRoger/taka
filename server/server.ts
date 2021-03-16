@@ -2,6 +2,9 @@ import { Application,isHttpError,Status } from "https://deno.land/x/oak/mod.ts";
 import database from './database/database.ts';
 import { calssroomRouter,authRouter } from './modules/routes.ts'
 import {oakCors } from 'https://deno.land/x/cors@v1.2.1/mod.ts';
+import {
+  jwtAuth
+} from './middlewares/authMiddleware.ts';
   
 const app = new Application();
 
@@ -24,6 +27,7 @@ app.use(async (ctx, next) => {
   ctx.response.headers.set("X-Response-Time", `${ms}ms`);
 });
 
+app.use(jwtAuth);
 
 app.use(calssroomRouter.routes());
 app.use(calssroomRouter.allowedMethods());
