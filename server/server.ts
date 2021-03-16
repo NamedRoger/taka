@@ -1,9 +1,7 @@
-import { Application,isHttpError,Status } from "https://deno.land/x/oak/mod.ts";
-import database from './database/database.ts';
+import { Application } from "https://deno.land/x/oak/mod.ts";
 import { calssroomRouter,authRouter } from './modules/routes.ts'
-import {oakCors } from 'https://deno.land/x/cors@v1.2.1/mod.ts';
+import { oakCors } from 'https://deno.land/x/cors@v1.2.1/mod.ts';
 
-  
 const app = new Application();
 
 
