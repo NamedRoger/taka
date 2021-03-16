@@ -10,7 +10,7 @@ const getPeriod = async ({request,response,params}:{request:any,response:any,par
     const id = Number(params.idPeriod);
     try{
         const period = await periodsService.getPeriodById(id);
-        if(period === undefined || period === null) ;
+        if(period === undefined || period === null){}
     }catch(e){
     }
 }
