@@ -2,6 +2,7 @@ import database from '../../../../database/database.ts';
 import {users} from '../../consts.ts'
 
 
+
 const query = (idUser:number) => `
 SELECT 
 name as nombre,
@@ -23,3 +24,14 @@ export const getUserById =  async (idUser:number) => {
     return res[0];
 }
 
+const queryLogin = (idUser: number, password: String) => `
+SELECT 
+idUser as idUsuario
+password as password
+FROM ${users.table}
+WHERE id_user = ${password}`
+
+export const getUserLogin = async (idUser:number, password: string) => {
+    const res = await database.query(queryLogin(idUser,password));
+    return res[0];
+}
