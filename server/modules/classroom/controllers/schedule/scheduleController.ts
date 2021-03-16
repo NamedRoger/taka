@@ -1,4 +1,4 @@
-import { Schedule } from '../../models/Schedule.ts';
+import { Schedule } from '../../models/schedule.ts';
 import * as scheduleService from '../../services/groups/schedule/scheduleService.ts';
 
 const addSchedule = async ({ request,response }: {request:any, response: any }) => {
