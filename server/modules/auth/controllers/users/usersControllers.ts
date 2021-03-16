@@ -1,5 +1,6 @@
 import { User } from '../../models/index.ts';
 import * as userServices from '../../services/users/userServices.ts';
+import {} from '../../services/ChangePassword/ChangePassword.ts'
 
 
 const getUsers =  async ({ request,response,params }: {request:any, response: any, params:any }) => {
@@ -14,6 +15,7 @@ const getUsers =  async ({ request,response,params }: {request:any, response: an
         }
     }
 }
+
 
 const addUser = async ({ request,response }: {request:any, response: any }) => {
     const body = await request.body({type:"json"});
@@ -73,11 +75,28 @@ const desactiveUser =  async ({ request,response,params }: {request:any, respons
     }
 }
 
+const ChangePassword = async ({request,response,params} : {request:any, response: any, params: any}) => {
+    const body = await request.body({type:"json"});
+    const {newPassword} = await body.value;
+    const idUser = Number(params.idUser)
+    try {
+        const res = await ChangePassword(idUser,newPassword);
+        response.status =204;
+    } catch (e) {
+        response.status = 400;
+        response.body ={
+            error: e.message
+        }
+
+    }
+}
+
 export {
     addUser,
     getUsers,
     getUserById,
     updateUser,
-    desactiveUser
+    desactiveUser,
+    ChangePassword
 }
 
