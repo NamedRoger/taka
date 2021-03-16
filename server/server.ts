@@ -27,8 +27,6 @@ app.use(async (ctx, next) => {
   ctx.response.headers.set("X-Response-Time", `${ms}ms`);
 });
 
-app.use(jwtAuth);
-
 app.use(calssroomRouter.routes());
 app.use(calssroomRouter.allowedMethods());
 

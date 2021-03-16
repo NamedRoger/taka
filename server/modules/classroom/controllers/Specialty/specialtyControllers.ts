@@ -1,4 +1,4 @@
-import { Specialty } from '../../models/Specialty.ts';
+import { Specialty } from '../../models/specialty.ts';
 import * as specialtyService from '../../services/specialties/specialtieService.ts';
 import { generateCode } from '../../../../helpers/index.ts';
 
