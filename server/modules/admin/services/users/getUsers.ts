@@ -1,6 +1,4 @@
 import database from '../../../../database/database.ts';
-import {users} from '../../consts.ts'
-
 
 const query = () => `
 SELECT 

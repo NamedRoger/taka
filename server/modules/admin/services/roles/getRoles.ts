@@ -1,5 +1,4 @@
 import database from '../../../../database/database.ts';
-import {roles} from '../../consts.ts'
 
 
 const query = () => `
@@ -8,7 +7,7 @@ SELECT
     nombre as name,
     codigo as code,
     activo as active
-FROM ${roles.table}
+FROM roles
 WHERE activo = ${true}
 `;
 

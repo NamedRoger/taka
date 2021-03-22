@@ -1,6 +1,8 @@
-import { Role } from '../models/index.ts';
+import { Role } from '../models/types.ts';
 import * as rolesService from '../services/roles/rolesServices.ts';
 import {generateCode} from '../../../helpers/index.ts';
+
+const CODE_ROLE = 'ROL';
 
 const getRoles =  async ({ request,response,params }: {request:any, response: any, params:any }) => {
     try{
@@ -19,7 +21,7 @@ const addRole = async ({ request,response }: {request:any, response: any }) => {
     const body = await request.body({type:"json"});
     const newRole: Role = await body.value;
     newRole.active = true;
-    newRole.code = generateCode(newRole.code,newRole.name).trim();
+    newRole.code = generateCode(CODE_ROLE,newRole.name).trim();
     try{
         const res = await rolesService.addRole(newRole);
         response.status = 201;
@@ -61,7 +63,7 @@ const desactiveRole =  async ({ request,response,params }: {request:any, respons
     const body = await request.body({type:"json"});
     const newRole: Role = await body.value;
     newRole.idRole = Number(params.idRole);
-    newRole.code = generateCode(newRole.code,newRole.name).trim();
+    newRole.code = generateCode(CODE_ROLE,newRole.name).trim();
     try{
         const res = await rolesService.updateRole(newRole);
         response.status = 204;

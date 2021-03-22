@@ -1,6 +1,5 @@
 import database from '../../../../database/database.ts';
-import { User} from '../../models/index.ts';
-import {users} from '../../consts.ts'
+import { User} from '../../models/types.ts';
 
 const query = ({idRole,
     name,
@@ -12,7 +11,7 @@ const query = ({idRole,
     mLastname,
     matricula,
     pLastname}:User) => `
-UPDATE ${users.table} SET nombre = '${name}', username = '${username}', activo '${active}',
+UPDATE usuarios SET nombre = '${name}', username = '${username}', activo '${active}',
 curp = '${curp}', email  = '${email}', idUuario = '${idUser}', apellido_materno = '${mLastname}', apellido_paterno = '${pLastname}' WHERE idUsuario = ${idUser}
 `;
 

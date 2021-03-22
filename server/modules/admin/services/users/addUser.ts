@@ -1,6 +1,5 @@
 import database from '../../../../database/database.ts'
-import {User} from '../../models/index.ts';
-import {users} from '../../consts.ts'
+import {User} from '../../models/types.ts';
 
 const query = ({idRole,
     name,
@@ -13,7 +12,7 @@ const query = ({idRole,
     matricula,
     pLastname,
     password}:User) => `
-    INSERT INTO ${users.table} (id_role,
+    INSERT INTO usuarios (id_role,
         nombre,
         username,
         activo,

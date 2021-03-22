@@ -1,8 +1,7 @@
 import database from '../../../../database/database.ts';
-import {users} from '../../consts.ts'
 
 const query = (idUser:number) => `
-UPDATE ${users.table} SET activo = ${false} WHERE id_user = ${idUser}
+UPDATE usuarios SET activo = ${false} WHERE id_user = ${idUser}
 `;
 
 export default async (idUser:number) => {

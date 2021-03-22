@@ -1,4 +1,4 @@
-import { User } from '../models/index.ts';
+import { User } from '../models/types.ts';
 import * as userServices from '../services/users/userServices.ts';
 import {notFound} from '../../../helpers/http/index.ts';
 import {hash} from "https://deno.land/x/scrypt/mod.ts";
