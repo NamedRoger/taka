@@ -6,3 +6,4 @@ export const roles = {
 export const users = {
     table: 'usuarios',
 }
+

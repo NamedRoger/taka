@@ -1,6 +1,6 @@
-import { Role } from '../../models/index.ts';
-import * as rolesService from '../../services/roles/rolesServices.ts';
-import {generateCode} from '../../../../helpers/index.ts';
+import { Role } from '../models/index.ts';
+import * as rolesService from '../services/roles/rolesServices.ts';
+import {generateCode} from '../../../helpers/index.ts';
 
 const getRoles =  async ({ request,response,params }: {request:any, response: any, params:any }) => {
     try{

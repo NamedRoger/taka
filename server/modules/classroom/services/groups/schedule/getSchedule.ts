@@ -15,7 +15,27 @@ INNER JOIN periodos as p ON p.id_periodo = h.id_periodo
 WHERE h.id_horario = ${idSchedule}
 `;
 
-export default async (idSchedule:number) => {
+export const getScheduleById = async (idSchedule:number) => {
     const result = await database.query(query(idSchedule));
     return result[0];
 }
+
+const queryGetbyGroup = (idGroup:number,idPeriod:number) => `
+SELECT 
+    h.id_horario as idGroup,
+    h.id_periodo as idPeriod,
+    h.id_grupo as idGroup,
+    g.nombre as groupName,
+    g.codigo as codeGroup,
+    p.nombre as periodName
+FROM ${table} as h 
+INNER JOIN grupos as g ON g.id_grupo = h.id_grupo
+INNER JOIN periodos as p ON p.id_periodo = h.id_periodo
+WHERE h.activo = ${true} AND g.id_grupo = ${idGroup} AND p.id_periodo = ${idPeriod}
+`;
+
+export default async (idGroup:number,idPeriod:number) => {
+    const result = await database.query(queryGetbyGroup(idGroup,idPeriod));
+    return result[0];
+}
+

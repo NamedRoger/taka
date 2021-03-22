@@ -10,4 +10,5 @@ export interface User {
     idRole:number
     curp?:string,
     matricula?:string
+    rol?:string
 }

@@ -1,4 +1,4 @@
-export * as helperHttps from './http/index.ts'; 
+
 
 export const generateCode = (prefijo:string,name:string) => {
     const spltiName = name.split(/[\s_-]/);
@@ -12,4 +12,3 @@ export const generateCode = (prefijo:string,name:string) => {
     });
     return `${prefijo.toUpperCase()}_${code.toUpperCase()}`;
 }
-

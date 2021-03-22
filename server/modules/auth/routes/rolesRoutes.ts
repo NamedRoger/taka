@@ -5,7 +5,7 @@ import {
     addRole,
     updateRole,
     desactiveRole
-} from '../controllers/roles/rolesController.ts';
+} from '../controllers/rolesController.ts';
 
 export default  (router:Router) => {
     router.get('/roles',getRoles);

@@ -2,6 +2,11 @@
 import { Group } from '../../models/group.ts';
 import * as groupService from '../../services/groups/groupService.ts';
 import { generateCode } from '../../../../helpers/index.ts';
+import { RouterContext } from "https://deno.land/x/oak/mod.ts";
+import { Schedule } from '../../models/schedule.ts';
+import * as scheduleService from '../../services/groups/schedule/scheduleService.ts';
+import { badRequest,notFound } from '../../../../helpers/http/index.ts';
+
 
 
 const addGroup =  async ({ request,response }: {request:any, response: any }) => {
@@ -21,7 +26,6 @@ const addGroup =  async ({ request,response }: {request:any, response: any }) =>
     }
     
 }
-
 
 const desactiveGroup =  async ({params, response }:{ params:any,response: any }) => {
     try{
@@ -80,6 +84,45 @@ const updateGroup = async ({ request,params,response }: {request:any,params:any,
     
 }
 
+const getScheduleByGroup = async (ctx:RouterContext) => {
+    const {request,response,params} = ctx;
+    const {idGroup,idPeriod} = params;
+    try {
+        const scheduleFind = await scheduleService.getSchedule(Number(idGroup),Number(idPeriod));
+        if(scheduleFind === null && scheduleFind === undefined) return notFound(ctx,"No existe ningún horario, por favor agregue uno");
+
+        response.body = scheduleFind;
+    }catch(e){
+        return badRequest(ctx,e.message);
+    }
+}
+
+const addSchedule = async (ctx:RouterContext) => {
+    const {request,response} = ctx;
+    const body = request.body({"type":"json"});
+    const newSchedule:Schedule = await body.value;
+    try{
+        const scheduleFind = await scheduleService.getSchedule(newSchedule.idGroup,newSchedule.idPeriod);
+        if(scheduleFind !== null && scheduleFind !== undefined) return badRequest(ctx,"Ya existe un horario en el periodo para este grupo");
+
+        newSchedule.active = true;
+        const res = await scheduleService.addSchedule(newSchedule);
+        newSchedule.idSchedule = res.affectedRows;
+
+        response.body = {
+            success:true,
+            data:newSchedule
+        }
+    }catch(e){
+        return badRequest(ctx,e.message);
+    }
+}
+
+const desactiveSchedule = async () => {
+
+}
+
+
 
 
 export {
@@ -87,6 +130,8 @@ export {
     getGroups,
     addGroup,
     desactiveGroup,
-    updateGroup
+    updateGroup,
+    addSchedule,
+    getScheduleByGroup
 } 
 
