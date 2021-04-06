@@ -53,7 +53,7 @@ const updatePeriod = async ({request,response,params}:{request:any,response:any,
     }
 }
 
-const desactivePeriod = async ({request,response,params}:{request:any,response:any,params:any}) => {
+const desactivePeriod = async ({request,response,params}:{request:Request,response:any,params:any}) => {
     const id = Number(params.idPeriod);
     try{
         const res = await periodsService.desactivePeriod(id);
