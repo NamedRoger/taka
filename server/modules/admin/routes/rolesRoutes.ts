@@ -1,4 +1,5 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import {Router} from '../../../deps.ts';
+import { authetincation, authorization } from '../../../middlewares/mod.ts';
 import {
     getRole,
     getRoles,
@@ -8,13 +9,13 @@ import {
 } from '../controllers/rolesController.ts';
 
 export default  (router:Router) => {
-    router.get('/roles',getRoles);
+    router.get('/roles',authetincation,async (c,n) =>{ await authorization(c,n,"admin")} ,getRoles);
 
-    router.get('/roles/:role',getRole);
+    router.get('/roles/:role',authetincation,async (c,n) =>{ await authorization(c,n,"admin")} ,getRole);
 
-    router.post('/roles',addRole);
+    router.post('/roles',authetincation,async (c,n) =>{ await authorization(c,n,"admin")} ,addRole);
 
-    router.put('/roles/:idRole',updateRole);
+    router.put('/roles/:idRole',authetincation,async (c,n) =>{ await authorization(c,n,"admin")} ,updateRole);
 
-    router.delete('/roles/:idRole',desactiveRole);
+    router.delete('/roles/:idRole',authetincation,async (c,n) =>{ await authorization(c,n,"admin")} ,desactiveRole);
 }
