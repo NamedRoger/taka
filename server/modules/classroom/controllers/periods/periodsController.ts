@@ -1,12 +1,13 @@
 import { IPeriod } from '../../models/period.ts';
 import * as periodsService from '../../services/periods/periodsService.ts';
+import {Request,Response,RouterContext,RouteParams} from '../../../../deps.ts';
 
-const getPeriods = async ({request,response}:{request:any,response:any}) => {
+const getPeriods = async ({request,response}:{request:Request,response:Response}) => {
     const periods = await periodsService.getPeriods();
     response.body = periods;
 }
 
-const getPeriod = async ({request,response,params}:{request:any,response:any,params:any}) => {
+const getPeriod = async ({request,response,params}:{request:Request,response:Response,params:RouteParams}) => {
     const id = Number(params.idPeriod);
     try{
         const period = await periodsService.getPeriodById(id);
@@ -19,7 +20,7 @@ const getPeriod = async ({request,response,params}:{request:any,response:any,par
     }
 }
 
-const addPeriod = async ({request,response}:{request:any,response:any}) => {
+const addPeriod = async ({request,response}:{request:Request,response:Response}) => {
     const body = await request.body({type:"json"});
 
     const newPeriod:IPeriod = await body.value;
@@ -36,7 +37,7 @@ const addPeriod = async ({request,response}:{request:any,response:any}) => {
     }
 }
 
-const updatePeriod = async ({request,response,params}:{request:any,response:any,params:any}) => {
+const updatePeriod = async ({request,response,params}:{request:Request,response:Response,params:RouteParams}) => {
     const body = await request.body({type:"json"});
     const newPeriod:IPeriod = await body.value;
     
@@ -53,7 +54,8 @@ const updatePeriod = async ({request,response,params}:{request:any,response:any,
     }
 }
 
-const desactivePeriod = async ({request,response,params}:{request:Request,response:any,params:any}) => {
+const desactivePeriod = async (ctx:RouterContext) => {
+    const {params,response} = ctx;
     const id = Number(params.idPeriod);
     try{
         const res = await periodsService.desactivePeriod(id);

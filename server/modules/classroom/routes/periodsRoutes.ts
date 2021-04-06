@@ -1,5 +1,5 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
-import { authetincation, authorization } from '../../../middlewares/index.ts';
+import { authetincation, authorization } from '../../../middlewares/mod.ts';
 import {
     getPeriods,
     addPeriod,
