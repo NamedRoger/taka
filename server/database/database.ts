@@ -15,7 +15,7 @@ class Database {
       db: Deno.env.get('DATABASE_DB'),
       poolSize:3,
       password:  Deno.env.get('DATABASE_PASSWORD'),
-      timeout:100000
+      timeout:28800
     });
     this.connection = client;
     
