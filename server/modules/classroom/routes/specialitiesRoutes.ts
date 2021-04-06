@@ -1,11 +1,11 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import {Router} from '../../../deps.ts';
 import {
     getSpecialtie,
     getSpecialties,
     updateSpecialty,
     addSpecialty,
     desactiveSpecialty
-} from '../controllers/Specialty/specialtyControllers.ts';
+} from '../controllers/specialtyControllers.ts';
 
 export default  (router:Router) => {
     router.get('/specialities',getSpecialties);

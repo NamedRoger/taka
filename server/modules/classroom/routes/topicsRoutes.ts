@@ -1,11 +1,11 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import {Router} from '../../../deps.ts';
 import {
     getTopics,
     addTopic,
     updateTopic,
     getTopic,
     desactiveTopic
-} from '../controllers/topics/topicsController.ts';
+} from '../controllers/topicsController.ts';
 
 export default  (router:Router) => {
     router.get('/topics',getTopics);

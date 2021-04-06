@@ -1,10 +1,10 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import {Router} from '../../../deps.ts';
 import {
     addSchedule,
     getSchedule,
     updateSchedule,
     desactiveSchedule
-} from '../controllers/schedule/scheduleController.ts';
+} from '../controllers/scheduleController.ts';
 
 export default  (router:Router) => {
 

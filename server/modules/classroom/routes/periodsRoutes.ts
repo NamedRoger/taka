@@ -1,4 +1,4 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import {Router} from '../../../deps.ts';
 import { authetincation, authorization } from '../../../middlewares/mod.ts';
 import {
     getPeriods,
@@ -7,20 +7,19 @@ import {
     getPeriod,
     updatePeriod
 
-} from '../controllers/periods/periodsController.ts';
+} from '../controllers/periodsController.ts';
 
 export default (router: Router) => {
+    
     router.get('/periods',authetincation,async (ctx,next) => {
-        if(!(await authorization(ctx.request,"admin"))) return;
-        
-        await next();
+        await authorization(ctx,next,"admin");
     }, getPeriods);
 
-    router.get('/periods/:idPeriod', getPeriod);
+    router.get('/periods/:idPeriod',authetincation,async (c,n) =>{ await authorization(c,n,"admin")} , getPeriod);
 
-    router.post('/periods', addPeriod);
+    router.post('/periods',authetincation,async (c,n) =>{ await authorization(c,n,"admin")}, addPeriod);
 
-    router.put('/periods/:idPeriod', updatePeriod);
+    router.put('/periods/:idPeriod',authetincation,async (c,n) =>{ await authorization(c,n,"admin")}, updatePeriod);
 
-    router.delete('/periods/:idPeriod', desactivePeriod);
+    router.delete('/periods/:idPeriod',authetincation,async (c,n) =>{ await authorization(c,n,"admin")}, desactivePeriod);
 }

@@ -1,6 +1,6 @@
-import { IPeriod } from '../../models/period.ts';
-import * as periodsService from '../../services/periods/periodsService.ts';
-import {Request,Response,RouterContext,RouteParams} from '../../../../deps.ts';
+import { IPeriod } from '../models/period.ts';
+import * as periodsService from '../services/periods/periodsService.ts';
+import {Request,Response,RouterContext,RouteParams} from '../../../deps.ts';
 
 const getPeriods = async ({request,response}:{request:Request,response:Response}) => {
     const periods = await periodsService.getPeriods();

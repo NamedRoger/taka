@@ -19,15 +19,14 @@ export const authetincation = async (ctx:Context,next:CallableFunction) => {
 
 }
 
-export const authorization = async (request:Request,...roles:string[]) => {
+export const authorization = async (cxt:Context,next:any,...roles:string[]) => {
+    const {request} = cxt;
     const token = getToken(request);
-    
     const resultVerify = await verify(token,auth.key,"HS256");
     const [header,payload,signature] = decode(token);
     const user:any = payload;
-    if(!roles.includes(user.role)) return false;
-    return true;
-
+    if(!roles.includes(user.role)) return unauthorized(cxt,"No tienes acceso a este recurso");
+    await next();
 }
 
 const getToken = (request:Request) => {

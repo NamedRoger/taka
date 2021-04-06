@@ -1,4 +1,4 @@
-import { Client,Connection } from "https://deno.land/x/mysql/mod.ts";
+import {Client} from '../deps.ts';
 
 class Database {
 

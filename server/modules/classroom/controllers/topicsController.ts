@@ -1,6 +1,6 @@
-import { Topic } from '../../models/topic.ts';
-import * as topicsService from '../../services/topics/topicsService.ts';
-import { generateCode } from '../../../../helpers/index.ts';
+import { Topic } from '../models/topic.ts';
+import * as topicsService from '../services/topics/topicsService.ts';
+import { generateCode } from '../../../helpers/index.ts';
 
 const addTopic = async ({ request,response }: {request:any, response: any }) => {
     const body = await request.body({type:"json"});

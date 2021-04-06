@@ -1,6 +1,6 @@
-import { Specialty } from '../../models/speciality.ts';
-import * as specialtyService from '../../services/specialties/specialtieService.ts';
-import { generateCode } from '../../../../helpers/index.ts';
+import { Specialty } from '../models/speciality.ts';
+import * as specialtyService from '../services/specialties/specialtieService.ts';
+import { generateCode } from '../../../helpers/index.ts';
 
 const addSpecialty = async ({ request,response }: {request:any, response: any }) => {
     const body = await request.body({type:"json"});
