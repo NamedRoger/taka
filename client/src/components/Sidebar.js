@@ -4,7 +4,7 @@ import SimpleBar from 'simplebar-react';
 import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faTable, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faChalkboardTeacher,faUserCog, faTimes,faChalkboard } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -96,12 +96,12 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Volt React" link={Routes.Presentation.path} image={ReactHero} />
+              <NavItem title="Taka" link={Routes.Presentation.path} image={ReactHero} />
 
-              <NavItem title="Tablero" link={Routes.Presentation.path} image={ReactHero} />
+              <NavItem title="Tablero" link={Routes.Presentation.path} icon={faChalkboard} />
 
 
-              <CollapsableNavItem eventKey="classroom/" title="Classroom" icon={faTable}>
+              <CollapsableNavItem eventKey="classroom/" title="Classroom" icon={faChalkboardTeacher}>
                 <NavItem title="Periodos" link={Routes.Periodos.path} />
                 <NavItem title="Especialidades" link={Routes.Especialidad.path} />
                 <NavItem title="Materias" link={Routes.Materias.path} />
@@ -109,7 +109,7 @@ export default (props = {}) => {
 
               </CollapsableNavItem>
 
-              <CollapsableNavItem eventKey="administracion/" title="Administracion" icon={faTable}>
+              <CollapsableNavItem eventKey="administracion/" title="Administracion" icon={faUserCog}>
                 <NavItem title="Usuarios" link={Routes.Periodos.path} />
               </CollapsableNavItem>
 
