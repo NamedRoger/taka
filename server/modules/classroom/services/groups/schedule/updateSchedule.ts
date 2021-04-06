@@ -2,8 +2,8 @@ import database from '../../../../../database/database.ts';
 import {Schedule} from '../../../models/schedule.ts';
 const table = "horario";
 
-const query = ({group,period,idSchedule}:Schedule) => `
-UPDATE ${table} SET id_periodo = ${period.idPeriod}, id_grupo = ${group.idGroup} WHERE id_horario = ${idSchedule}
+const query = ({idGroup,idPeriod,idSchedule}:Schedule) => `
+UPDATE ${table} SET id_periodo = ${idPeriod}, id_grupo = ${idGroup} WHERE id_horario = ${idSchedule}
 `;
 
 export default async (schedule:Schedule) => {

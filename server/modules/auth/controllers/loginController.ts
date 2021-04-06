@@ -1,39 +1,56 @@
-import * as userService from '../services/users/userServices.ts';
-import {Login,User} from '../models/index.ts';
-import {hash,verify} from "https://deno.land/x/scrypt/mod.ts";
-import {Header,Payload,create,getNumericDate} from "https://deno.land/x/djwt@v2.2/mod.ts";
+import {getUserLogin} from '../services/loginService.ts';
+import {Login} from '../models/index.ts';
+import {verify,hash} from "https://deno.land/x/scrypt/mod.ts";
+import {Header,create,getNumericDate} from "https://deno.land/x/djwt@v2.2/mod.ts";
+import {RouterContext} from 'https://deno.land/x/oak/mod.ts';
+import {auth} from '../../../consts.ts';
 
 
-
-const createToken = async (ctx:any) => {
-    const {response,request}:{response:any,request:any} = ctx;
-    const body = await request.body({type:"json"});
-    const loginModel:Login = await body.value;
-    const user:User = await userService.getUserLogin(loginModel);
-    if(user === null || user === undefined){
-        response.body = {
-            error:"no existe el usuario"
-        }
-    }else{
-        if(user.password !== undefined){
-            if(!(await verify(user.password,loginModel.password))){
+const login = async (ctx:RouterContext) => {
+    const {request,response} = ctx;
+    const body =  request.body({type:"json"});
+    const logingModel:Login = await body.value;
+    try{
+        const user = await getUserLogin(logingModel);
+        if(user === null || user === undefined){
+            response.body = {
+                error:"no existe el usuario"
+            }
+        }else{
+            if((await verify(logingModel.password,user.password))){
+                const token = await createToken(user.username,user.role);
+                response.status = 200;
                 response.body = {
-                    error:"la contraseña es incorrecta"
-                }   
-            }else{
-                const header:Header = {
-                    alg:"HS256",
+                    token:token
                 }
-
-                const playload = {
-                    exp:getNumericDate(60*60),
-                    username:loginModel.username,
-                    rol:user.rol,
-                    
+            }else{
+                response.status = 404;
+                response.body = {
+                    error:"el password no es el correcto"
                 }
             }
         }
+    
+    }catch(e){
+        response.status = 404;
+        response.body = {
+            error: e.message
+        }
     }
+  
+    
+
+}
+
+const createToken = async (username:string,role:string):Promise<string> => {
+   const header:Header = {alg:"HS256"};
+   
+   const payload = {
+       username:username,
+       role:role,
+       exp:getNumericDate(60*60*24)
+   }
+   return await create(header,payload,auth.key);
 }
 
 const logut = async () => {
@@ -41,6 +58,6 @@ const logut = async () => {
 }
 
 export {
-    createToken,
+    login,
     logut
 }

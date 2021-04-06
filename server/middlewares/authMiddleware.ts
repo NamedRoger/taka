@@ -1,15 +1,17 @@
-import {Context} from "https://deno.land/x/oak/mod.ts";
+import {Context,Request} from "https://deno.land/x/oak/mod.ts";
 import {verify,decode}  from "https://deno.land/x/djwt@v2.2/mod.ts";
 import {unauthorized} from '../helpers/http/index.ts'
+import {auth} from '../consts.ts';
 
-export const auth = async (ctx:Context,next:any,...roles:string[]) => {
+export const authetincation = async (ctx:Context,next:CallableFunction) => {
     const {request,response} = ctx;
     if(!request.headers.has('Authorization')) return unauthorized(ctx);
     
-    const headerAuth = request.headers.get('Authorization') || '';
-    const [type,token] = headerAuth.split(" ");
+    const token = getToken(request);
     try{
-        const resultVerify = await verify(token,"llave","HS256");
+        const resultVerify = await verify(token,auth.key,"HS256");
+        const [header,payload,signature] = decode(token);
+        
         await next();
     }catch(e){
         return unauthorized(ctx);
@@ -17,12 +19,19 @@ export const auth = async (ctx:Context,next:any,...roles:string[]) => {
 
 }
 
-const authorization = (token:string,roles:string[]) => {
+export const authorization = async (request:Request,...roles:string[]) => {
+    const token = getToken(request);
+    
+    const resultVerify = await verify(token,auth.key,"HS256");
     const [header,payload,signature] = decode(token);
-    console.log(payload,signature,header);
+    const user:any = payload;
+    if(!roles.includes(user.role)) return false;
+    return true;
+
 }
 
-const userPayload = (token:string) => {
-    const userInfo = decode(token);
-    return userInfo;
+const getToken = (request:Request) => {
+    const headerAuth = request.headers.get('Authorization') || '';
+    const [type,token] = headerAuth.split(" ");
+    return token;
 }

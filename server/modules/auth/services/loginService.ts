@@ -9,7 +9,7 @@ SELECT
     u.username,
     u.nombre as name,
     u.id_role as idRole,
-    r.nombre as role,
+    r.nombre as role
 FROM usuarios as u
 INNER JOIN roles as r ON r.id_rol = u.id_role
 WHERE u.username = '${username}'`

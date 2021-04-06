@@ -1,5 +1,5 @@
 env: 
-  PORT: 3000
+  PORT: 8080
   #servidor
   DATABASE_HOST: iguanadevs.com 
   DATABASE_PORT: 3306  
@@ -15,4 +15,6 @@ env:
   # DATABASE_PASSWORD: root
   # DATABASE_DB: taka
 scripts: 
-  start: deno run --allow-net --allow-env server.ts
+  start:
+    cmd: deno run --allow-net  --unstable --allow-env server.ts
+    watch: true

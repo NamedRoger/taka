@@ -20,17 +20,10 @@ const addSchedule = async ({ request,response }: {request:any, response: any }) 
 
 const dataToSchedule = (data:any):Schedule => ({
     active:data.active,
-    group:{
-        idGroup:Number(data.idGroup),
-        name:"",
-        code:""
-    },
-    period:{
-        idPeriod:Number(data.idPeriod),
-        name:"",
-        finishDate:new Date(),
-        initDate:new Date()
-    }
+    idGroup: Number.parseInt(data.idGroup),
+    idPeriod: Number.parseInt(data.idPeriod),
+    idSchedule: Number.parseInt(data.idSchedule),
+    name: data.name
 });
 
 
@@ -50,7 +43,7 @@ const desactiveSchedule = async ({ response,params }: { response: any,params:any
 const getSchedule = async ({ response,params }: { response: any,params:any }) => {
 
     try{
-        const scheduele = await scheduleService.getSchedule(Number(params.idSchedule));
+        const scheduele = await scheduleService.getSchedule(Number.parseInt(params.idGroup),Number.parseInt(params.idPeriod));
         response.status = 200;
         response.body = scheduele;
     }catch(e){
@@ -62,20 +55,20 @@ const getSchedule = async ({ response,params }: { response: any,params:any }) =>
 }
 
 
-const getSchedules = async ({ response,params }: { response: any, params:any }) => {
-    const {idGroup,idPeriod} = params
-    try{
-        const schedules = await scheduleService.getSchedules(idGroup,idPeriod);
+// const getSchedules = async ({ response,params }: { response: any, params:any }) => {
+//     const {idGroup,idPeriod} = params
+//     try{
+//         const schedules = await scheduleService.getSchedules(idGroup,idPeriod);
 
-        response.status = 200;
-        response.body = schedules;
-    }catch(e){
-        response.status = 400;
-        response.body = {
-            error:e.message
-        };
-    }
-}
+//         response.status = 200;
+//         response.body = schedules;
+//     }catch(e){
+//         response.status = 400;
+//         response.body = {
+//             error:e.message
+//         };
+//     }
+// }
 
 const updateSchedule = async ({ request,response,params }: {request:any, response: any,params:any }) => {
     const body = await request.body({type:"json"});
@@ -97,7 +90,6 @@ const updateSchedule = async ({ request,response,params }: {request:any, respons
 export {
     addSchedule,
     getSchedule,
-    getSchedules,
     updateSchedule,
     desactiveSchedule
 }
