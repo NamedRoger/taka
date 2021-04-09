@@ -1,15 +1,14 @@
 
 import { Group } from '../../models/group.ts';
-import * as groupService from '../../services/groups/groupService.ts';
-import { generateCode } from '../../../../helpers/index.ts';
-import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import { Schedule } from '../../models/schedule.ts';
+import * as groupService from '../../services/groups/groupService.ts';
 import * as scheduleService from '../../services/groups/schedule/scheduleService.ts';
+import { generateCode } from '../../../../helpers/index.ts';
 import { badRequest,notFound } from '../../../../helpers/http/mod.ts';
+import {Request,RouterContext,Response,RouteParams} from '../../../../deps.ts';
 
 
-
-const addGroup =  async ({ request,response }: {request:any, response: any }) => {
+const addGroup =  async ({ request,response }: {request:Request, response: Response }) => {
     const body = await request.body({type:"json"});
     const newGroup: Group = await body.value;
     newGroup.active = true;
@@ -27,7 +26,7 @@ const addGroup =  async ({ request,response }: {request:any, response: any }) =>
     
 }
 
-const desactiveGroup =  async ({params, response }:{ params:any,response: any }) => {
+const desactiveGroup =  async ({params, response }:{ params:RouteParams,response: Response }) => {
     try{
         const res = await  groupService.desactivegroup(Number(params.idGroup));
         response.status = 204;
@@ -39,7 +38,7 @@ const desactiveGroup =  async ({params, response }:{ params:any,response: any })
     }
 }
 
-const getGroup = async ({params, response }:{ params:any,response: any }) => {
+const getGroup = async ({params, response }:{ params:RouteParams,response: Response }) => {
     try{
         const res:Group = await groupService.getGrupoById(Number(params.group));
 
@@ -53,7 +52,7 @@ const getGroup = async ({params, response }:{ params:any,response: any }) => {
     }
 }
 
-const getGroups = async ({ response }: { response: any }) => {
+const getGroups = async ({ response }: { response: Response }) => {
     try{
         const periods = await groupService.getGroups();
 
@@ -67,7 +66,7 @@ const getGroups = async ({ response }: { response: any }) => {
     }
 }
 
-const updateGroup = async ({ request,params,response }: {request:any,params:any, response: any }) => {
+const updateGroup = async ({ request,params,response }: {request:Request,params:RouteParams, response: Response }) => {
     const body = await request.body({type:"json"});
     const newDataGroup:Group = await body.value;
     newDataGroup.idGroup = params.idGroup;
