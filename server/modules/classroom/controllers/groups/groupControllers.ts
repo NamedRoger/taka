@@ -5,7 +5,7 @@ import { generateCode } from '../../../../helpers/index.ts';
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import { Schedule } from '../../models/schedule.ts';
 import * as scheduleService from '../../services/groups/schedule/scheduleService.ts';
-import { badRequest,notFound } from '../../../../helpers/http/index.ts';
+import { badRequest,notFound } from '../../../../helpers/http/mod.ts';
 
 
 

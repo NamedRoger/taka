@@ -1,9 +1,7 @@
 import {getUserLogin} from '../services/loginService.ts';
-import {Login} from '../models/index.ts';
-import {verify,hash} from "https://deno.land/x/scrypt/mod.ts";
-import {Header,create,getNumericDate} from "https://deno.land/x/djwt@v2.2/mod.ts";
-import {RouterContext} from 'https://deno.land/x/oak/mod.ts';
+import {Login} from '../models/mod.ts';
 import {auth} from '../../../consts.ts';
+import {RouterContext,Header,create,getNumericDate,verifyCrypt,hash,Payload} from '../../../deps.ts';
 
 
 const login = async (ctx:RouterContext) => {
@@ -17,7 +15,7 @@ const login = async (ctx:RouterContext) => {
                 error:"no existe el usuario"
             }
         }else{
-            if((await verify(logingModel.password,user.password))){
+            if((await verifyCrypt(logingModel.password,user.password))){
                 const token = await createToken(user.username,user.role);
                 response.status = 200;
                 response.body = {
@@ -37,15 +35,13 @@ const login = async (ctx:RouterContext) => {
             error: e.message
         }
     }
-  
-    
-
 }
 
 const createToken = async (username:string,role:string):Promise<string> => {
    const header:Header = {alg:"HS256"};
    
-   const payload = {
+   const payload:Payload = {
+       iss:"taka",
        username:username,
        role:role,
        exp:getNumericDate(60*60*24)

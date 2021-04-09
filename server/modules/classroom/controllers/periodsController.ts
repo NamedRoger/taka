@@ -22,7 +22,6 @@ const getPeriod = async ({request,response,params}:{request:Request,response:Res
 
 const addPeriod = async ({request,response}:{request:Request,response:Response}) => {
     const body = await request.body({type:"json"});
-
     const newPeriod:IPeriod = await body.value;
     try{
         const res = await periodsService.addPeriod(newPeriod);
@@ -43,6 +42,8 @@ const updatePeriod = async ({request,response,params}:{request:Request,response:
     
     const id = Number(params.idPeriod);
     try{
+        const foundPeriod = await periodsService.getPeriodById(id);
+        // if(foundPeriod == null || foundPeriod == undefined) ;
         newPeriod.idPeriod = id;
         await periodsService.updatePeriod(newPeriod);
         response.status = 204
@@ -67,8 +68,6 @@ const desactivePeriod = async (ctx:RouterContext) => {
         }
     }
 }
-
-
 
 export {
     getPeriods,

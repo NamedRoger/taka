@@ -1,6 +1,6 @@
 
 import database from '../../../database/database.ts';
-import {Login} from '../models/index.ts';
+import {Login} from '../models/mod.ts';
 
 const queryLogin = ({username,password}:Login) => `
 SELECT 

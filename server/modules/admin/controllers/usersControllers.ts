@@ -1,8 +1,7 @@
 import { User } from '../models/types.ts';
 import * as userServices from '../services/users/userServices.ts';
-import {notFound} from '../../../helpers/http/index.ts';
-import {hash} from "https://deno.land/x/scrypt/mod.ts";
-
+import {notFound} from '../../../helpers/http/mod.ts';
+import {hash,RouterContext} from '../../../deps.ts';
 
 const getUsers =  async ({ request,response,params }: {request:any, response: any, params:any }) => {
     try{
@@ -38,11 +37,12 @@ const addUser = async ({ request,response }: {request:any, response: any }) => {
     }
 }
 
-const getUserById =  async ({ request,response,params }: {request:any, response: any,params:any }) => {
+const getUserById =  async (ctx:RouterContext) => {
+    const {response,request,params} = ctx;
     try{
         const user:User = await userServices.getUserById(Number(params.idUser));
         if(user === null || user === undefined) {
-            response.status = 404;
+            return notFound(ctx);
         }else{
             response.status = 200;
             response.body = user;

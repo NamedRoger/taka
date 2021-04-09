@@ -1,1 +1,1 @@
-export  { authetincation, authorization } from './authMiddleware.ts';
+export  { authetincation, authorization, userMiddleware} from './authMiddleware.ts';
