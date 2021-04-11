@@ -32,6 +32,7 @@ FROM ${table} as h
 INNER JOIN grupos as g ON g.id_grupo = h.id_grupo
 INNER JOIN periodos as p ON p.id_periodo = h.id_periodo
 WHERE h.activo = ${true} AND g.id_grupo = ${idGroup} AND p.id_periodo = ${idPeriod}
+ORDER BY h.id_horario DESC
 `;
 
 export default async (idGroup:number,idPeriod:number) => {

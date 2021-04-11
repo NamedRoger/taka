@@ -3,9 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "../routes";
 
 // pages
-import Presentation from "./Presentation";
 import Signin from "./examples/Signin";
-import Signup from "./examples/Signup";
 import ForgotPassword from "./examples/ForgotPassword";
 import ResetPassword from "./examples/ResetPassword";
 import Lock from "./examples/Lock";
@@ -24,6 +22,8 @@ import Preloader from "../components/Preloader";
 import Periodos from './classroom/periods/periods';
 import Grupos from './classroom/groups/grupos';
 import Horarios from './classroom/groups/horarios/horarios';
+import DashboardOverview from './classroom/students/DashboardOverview';
+import { Container } from '@themesberg/react-bootstrap';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -74,16 +74,25 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   );
 };
 
+const Home = () => {
+  return(
+    <Container>
+      <h1>Bienvendio</h1>
+    </Container>
+  );
+}
+
 export default () => (
   <Switch>
-    <RouteWithLoader exact path={Routes.Presentation.path} component={Presentation} />
     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
-    <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
     <RouteWithLoader exact path={Routes.ForgotPassword.path} component={ForgotPassword} />
     <RouteWithLoader exact path={Routes.ResetPassword.path} component={ResetPassword} />
     <RouteWithLoader exact path={Routes.Lock.path} component={Lock} />
     <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
     <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
+
+    <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} />
+    <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
 
     {/* pages */}
     <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} />

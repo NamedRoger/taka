@@ -41,7 +41,6 @@ const desactiveGroup =  async ({params, response }:{ params:RouteParams,response
 const getGroup = async ({params, response }:{ params:RouteParams,response: Response }) => {
     try{
         const res:Group = await groupService.getGrupoById(Number(params.group));
-
         response.status = 200;
         response.body = res;
     }catch(e){
@@ -55,7 +54,6 @@ const getGroup = async ({params, response }:{ params:RouteParams,response: Respo
 const getGroups = async ({ response }: { response: Response }) => {
     try{
         const periods = await groupService.getGroups();
-
         response.status = 200;
         response.body = periods;
     }catch(e){
@@ -66,13 +64,18 @@ const getGroups = async ({ response }: { response: Response }) => {
     }
 }
 
-const updateGroup = async ({ request,params,response }: {request:Request,params:RouteParams, response: Response }) => {
+const updateGroup = async (ctx:RouterContext) => {
+    const {request,response,params} = ctx;
     const body = await request.body({type:"json"});
     const newDataGroup:Group = await body.value;
-    newDataGroup.idGroup = params.idGroup;
+    
+    newDataGroup.idGroup = parseInt(params.idGroup || '0');
     newDataGroup.code = generateCode("GPO",newDataGroup.name);
     try{
-        const res = await groupService.updategroup(newDataGroup);
+        const foundGroup = await groupService.getGrupoById(newDataGroup.idGroup);
+        if(!foundGroup) return notFound(ctx);
+
+        const resutl = await groupService.updategroup(newDataGroup);
         response.status = 204;
     }catch(e){
         response.status = 400;
@@ -83,45 +86,6 @@ const updateGroup = async ({ request,params,response }: {request:Request,params:
     
 }
 
-const getScheduleByGroup = async (ctx:RouterContext) => {
-    const {request,response,params} = ctx;
-    const {idGroup,idPeriod} = params;
-    try {
-        const scheduleFind = await scheduleService.getSchedule(Number(idGroup),Number(idPeriod));
-        if(scheduleFind === null && scheduleFind === undefined) return notFound(ctx,"No existe ningún horario, por favor agregue uno");
-
-        response.body = scheduleFind;
-    }catch(e){
-        return badRequest(ctx,e.message);
-    }
-}
-
-const addSchedule = async (ctx:RouterContext) => {
-    const {request,response} = ctx;
-    const body = request.body({"type":"json"});
-    const newSchedule:Schedule = await body.value;
-    try{
-        const scheduleFind = await scheduleService.getSchedule(newSchedule.idGroup,newSchedule.idPeriod);
-        if(scheduleFind !== null && scheduleFind !== undefined) return badRequest(ctx,"Ya existe un horario en el periodo para este grupo");
-
-        newSchedule.active = true;
-        const res = await scheduleService.addSchedule(newSchedule);
-        newSchedule.idSchedule = res.affectedRows;
-
-        response.body = {
-            success:true,
-            data:newSchedule
-        }
-    }catch(e){
-        return badRequest(ctx,e.message);
-    }
-}
-
-const desactiveSchedule = async () => {
-
-}
-
-
 
 
 export {
@@ -129,8 +93,6 @@ export {
     getGroups,
     addGroup,
     desactiveGroup,
-    updateGroup,
-    addSchedule,
-    getScheduleByGroup
+    updateGroup
 } 
 

@@ -1,8 +1,10 @@
 import { Specialty } from '../models/speciality.ts';
 import * as specialtyService from '../services/specialties/specialtieService.ts';
 import { generateCode } from '../../../helpers/index.ts';
+import {RouterContext,Request,Response} from '../../../deps.ts';
 
-const addSpecialty = async ({ request,response }: {request:any, response: any }) => {
+const addSpecialty = async (ctx:RouterContext) => {
+    const {request,response} = ctx;
     const body = await request.body({type:"json"});
     const newSpecialty: Specialty = await body.value;
     newSpecialty.active = true;
@@ -13,7 +15,7 @@ const addSpecialty = async ({ request,response }: {request:any, response: any })
         response.body = res;
     }catch(e){
         response.status = 400;
-        response.boy = {
+        response.body = {
             error:e.message
         }
     }

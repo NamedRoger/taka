@@ -69,7 +69,7 @@ export default (props = {}) => {
   return (
     <>
       <Navbar expand={false} collapseOnSelect variant="dark" className="navbar-theme-primary px-4 d-md-none">
-        <Navbar.Brand className="me-lg-5" as={Link} to={Routes.DashboardOverview.path}>
+        <Navbar.Brand className="me-lg-5" >
           <Image src={ReactHero} className="navbar-brand-light" />
         </Navbar.Brand>
         <Navbar.Toggle as={Button} aria-controls="main-navbar" onClick={onCollapse}>
@@ -96,9 +96,9 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Taka" link={Routes.Presentation.path} image={ReactHero} />
+              <NavItem title="Taka"  image={ReactHero} />
 
-              <NavItem title="Tablero" link={Routes.Presentation.path} icon={faChalkboard} />
+              <NavItem title="Tablero" link={Routes.DashboardOverview.path} icon={faChalkboard} />
 
 
               <CollapsableNavItem eventKey="classroom/" title="Classroom" icon={faChalkboardTeacher}>

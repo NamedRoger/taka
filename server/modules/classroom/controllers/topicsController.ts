@@ -17,7 +17,6 @@ const addTopic = async ({ request,response }: {request:any, response: any }) => 
             error: e.message
         }
     }
-    
 }
 
 const desactiveTopic = async ({params, response }:{ params:any,response: any }) => {
