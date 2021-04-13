@@ -6,7 +6,6 @@ import { Context, Request, validateJWT, verifyJWT, decode } from '../deps.ts'
 export const userMiddleware = async (ctx: Context, next: CallableFunction) => {
     const { request, response } = ctx;
     const token = getToken(request);
-    console.log(token);
     if (token) {
         try {
             const resultVerify = await verifyJWT(token, auth.key, "HS256");

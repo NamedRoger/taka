@@ -15,7 +15,8 @@ export default function Form({data, onChange, onSubmit,onReset}) {
                     aria-describedby="passwordHelpBlock" 
                     name="name"
                     value={data.name} 
-                    onChange={(e) => {onChange(e.target)}} />
+                    onChange={(e) => {onChange(e.target)}} 
+                    required/>
                 </div>
             <div className="form-group mt-2">
                     <button className="btn btn-success btn-sm" 

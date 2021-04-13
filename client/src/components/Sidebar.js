@@ -13,6 +13,7 @@ import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 
 export default (props = {}) => {
+
   const location = useLocation();
   const { pathname } = location;
   const [show, setShow] = useState(false);
@@ -96,7 +97,7 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Taka"  image={ReactHero} />
+              <NavItem title="Taka" link={Routes.Presentation}  image={ReactHero} />
 
               <NavItem title="Tablero" link={Routes.DashboardOverview.path} icon={faChalkboard} />
 

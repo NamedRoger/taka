@@ -9,8 +9,8 @@ export function ok() {
 
 }
 
-export function noContent() {
-
+export function noContent(ctx:Context) {
+    ctx.response.status = Status.NoContent;
 }
 
 export function badRequest(ctx: Context, message = "Error al solicitar") {

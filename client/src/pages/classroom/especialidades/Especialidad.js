@@ -38,9 +38,23 @@ export default function Especialidad() {
         });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(especialidad);
+        if(especialidad.idSpecialty === 0){
+            const res = await serviceEspecialidades.addEspecialidad(especialidad);
+            if(res.status === 201) {
+                await setEspecialidades(await getEspecialidades());
+                onReset();
+            }
+            else alert('Ocurrio un error');
+        }else{
+            const res = await serviceEspecialidades.updateEspecialidad(especialidad.idSpecialty,especialidad);
+            if(res.status === 204) {
+                await setEspecialidades(await getEspecialidades())
+                onReset();
+            }
+            else alert('Ocurrio un error');
+        }
     }
 
     const onReset = () => {
@@ -56,10 +70,19 @@ export default function Especialidad() {
 
     }
 
-    const onSelect = ({id,operation}) => {
+    const onSelect =({id,operation}) => {
         switch(operation){
             case 'delete':
-                // onDeletePeriodo(id);
+                serviceEspecialidades.deleteEspecialidad(id).then(
+                    res => {
+                        if(res.status === 204){
+                            getEspecialidades().then(res => setEspecialidades(res))
+                            onReset();
+                        }
+                        else alert('Ocurrio un error');
+                    },
+                    err => console.log(err)
+                );
                 break;
             case 'edit':
                 onEdtiEspecialidad(id);

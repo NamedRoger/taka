@@ -37,8 +37,11 @@ const Periodos = () => {
     }
     
     const onDeletePeriodo = async (id) => {
-        const periodo = periodos.find(p => p.idPeriod === id);
-        console.log(periodo);
+        const res = await servicePeriodos.deletePeriodo(id);
+        if(res.status === 204){
+            setPeriodos(await getPeriodos());
+            onReset();
+        }
     }
 
     useEffect(() => {
@@ -58,9 +61,26 @@ const Periodos = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(periodo);
+        let res;
+        try{
+            if(periodo.idPeriod === 0){
+                res = await servicePeriodos.addPeriod(periodo);
+            }else {
+                res = await servicePeriodos.updatePeriodo(periodo.idPeriod,periodo);
+            }
+            
+            if(res.status === 200 || res.status === 201 || res.status === 204 ){
+                setPeriodos(await getPeriodos());
+                onReset();
+            }else{
+                alert('Ocurrio un error');
+            }
+        }catch(e){
+            alert(e.message);
+        }
+       
     }
 
     

@@ -8,5 +8,6 @@ export {
     getClass,
     getClassById,
     addClass, 
-    updateClass,desactiveClass
+    updateClass,
+    desactiveClass
 }

@@ -9,7 +9,7 @@ SELECT
     id_especialidad as idSpeciality,
     es.nombre as speciality
 FROM ${table}
-INNER JOINT especialidades as es ON es.id_especialidad = id_especialidad
+INNER JOIN especialidades as es ON es.id_especialidad = id_especialidad
 WHERE id_grupo = ${idGrupo}
 `;
 

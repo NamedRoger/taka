@@ -2,7 +2,6 @@
 import { Group } from '../../models/group.ts';
 import { Schedule } from '../../models/schedule.ts';
 import * as groupService from '../../services/groups/groupService.ts';
-import * as scheduleService from '../../services/groups/schedule/scheduleService.ts';
 import { generateCode } from '../../../../helpers/index.ts';
 import { badRequest,notFound } from '../../../../helpers/http/mod.ts';
 import {Request,RouterContext,Response,RouteParams} from '../../../../deps.ts';

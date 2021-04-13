@@ -31,20 +31,29 @@ const Grupos = () => {
         setGrupo({
             ...grupo
         });
+    }
 
+    const onDelete = async (id) => {
+        const res = await serviceGrupos.deleteGrupo(id);
+
+        if(res.status === 200 || res.status === 201 || res.status === 204){
+            setGrupos(await getGrupos());
+            onReset();
+        }else{
+            alert('Ocurrió un error');
+        }
     }
 
     useEffect(() => {
         (async() => {
             setGrupos(await getGrupos());
-
         })();
     },[]);
 
     const onSelect = ({id,operation}) => {
         switch(operation){
             case 'delete':
-                // onDeletePeriodo(id);
+                onDelete(id);
                 break;
             case 'edit':
                 onEdtiGrupo(id);
@@ -54,9 +63,21 @@ const Grupos = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(grupo);
+        let res;
+        if(grupo.idGroup === 0){
+            res = await serviceGrupos.addGrupo(grupo);
+        }else{
+            res = await serviceGrupos.updateGrupo(grupo.idGroup,grupo);
+        }
+
+        if(res.status === 200 || res.status === 201 || res.status === 204){
+            setGrupos(await getGrupos());
+            onReset();
+        }else{
+            alert('Ocurrió un error');
+        }
     }
 
     

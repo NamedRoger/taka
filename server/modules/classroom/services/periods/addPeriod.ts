@@ -5,7 +5,7 @@ const table = "periodos";
 
 const query = ({name,finishDate,initDate,active}:IPeriod) => `
 INSERT INTO ${table} (nombre,fecha_inicio,fecha_fin,activo) 
-VALUES ('${name}','${initDate}','${finishDate}',${active})
+VALUES ('${name}','${initDate}','${finishDate}',${true})
 `;
 
 export default async ({finishDate,initDate,name,active}:IPeriod) => {

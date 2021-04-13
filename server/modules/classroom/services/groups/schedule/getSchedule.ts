@@ -22,7 +22,7 @@ export const getScheduleById = async (idSchedule:number) => {
 
 const queryGetbyGroup = (idGroup:number,idPeriod:number) => `
 SELECT 
-    h.id_horario as idGroup,
+    h.id_horario as idSchedule,
     h.id_periodo as idPeriod,
     h.id_grupo as idGroup,
     g.nombre as groupName,
@@ -31,7 +31,7 @@ SELECT
 FROM ${table} as h 
 INNER JOIN grupos as g ON g.id_grupo = h.id_grupo
 INNER JOIN periodos as p ON p.id_periodo = h.id_periodo
-WHERE h.activo = ${true} AND g.id_grupo = ${idGroup} AND p.id_periodo = ${idPeriod}
+WHERE h.activo = ${true} AND h.id_grupo = ${idGroup} AND h.id_periodo = ${idPeriod}
 ORDER BY h.id_horario DESC
 `;
 

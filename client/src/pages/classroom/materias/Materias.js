@@ -31,9 +31,21 @@ export default function Materias() {
     },[]);
     
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(materia);
+        let res;
+        if(materia.idTopic === 0){
+            res = await serviceMaterias.addMateria(materia);
+        }else{
+            res = await serviceMaterias.updateMateria(materia.idTopic, materia);
+        }
+
+        if(res.status === 200 || res.status === 201 || res.status === 204 ){
+            setMaterias(await getMaterias());
+            reset();
+        }else{
+            alert('Ocurrio un error');
+        }
     }
 
     
@@ -49,6 +61,16 @@ export default function Materias() {
         setMateria(initMateria);
     }
 
+    const onDeleteMateria = async (id) => {
+        const res = await serviceMaterias.desactiveMateria(id);
+        if(res.status === 204){
+            setMaterias(await getMaterias());
+            reset();
+        }else{
+            alert('Ocurrió un error');
+        }
+    }
+
     const onEdtiMateria = async (id) => {
         console.log(id);
         const materia = materias.find(p => p.idTopic === id);
@@ -62,7 +84,7 @@ export default function Materias() {
     const onSelect = ({id,operation}) => {
         switch(operation){
             case 'delete':
-                // onDeletePeriodo(id);
+                onDeleteMateria(id);
                 break;
             case 'edit':
                 onEdtiMateria(id);

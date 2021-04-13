@@ -8,10 +8,13 @@ import { Row, Col, Nav, Form, Image, Navbar, Dropdown, Container, ListGroup, Inp
 import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 
+import useUser from '../hooks/useUser';
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
+  const {logout} = useUser();
+
 
   const markNotificationsAsRead = () => {
     setTimeout(() => {
@@ -23,7 +26,6 @@ export default (props) => {
   const Notification = (props) => {
     const { link, sender, image, time, message, read = false } = props;
     const readClassName = read ? "" : "text-danger";
-
     return (
       <ListGroup.Item action href={link} className="border-bottom border-light">
         <Row className="align-items-center">
@@ -93,22 +95,7 @@ export default (props) => {
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu className="user-dropdown dropdown-menu-right mt-2">
-                <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faUserCircle} className="me-2" /> My Profile
-                </Dropdown.Item>
-                <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faCog} className="me-2" /> Settings
-                </Dropdown.Item>
-                <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faEnvelopeOpen} className="me-2" /> Messages
-                </Dropdown.Item>
-                <Dropdown.Item className="fw-bold">
-                  <FontAwesomeIcon icon={faUserShield} className="me-2" /> Support
-                </Dropdown.Item>
-
-                <Dropdown.Divider />
-
-                <Dropdown.Item className="fw-bold">
+                <Dropdown.Item className="fw-bold" onClick={() => {logout()}}>
                   <FontAwesomeIcon icon={faSignOutAlt} className="text-danger me-2" /> Logout
                 </Dropdown.Item>
               </Dropdown.Menu>

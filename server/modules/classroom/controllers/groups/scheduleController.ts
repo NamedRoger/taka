@@ -7,11 +7,17 @@ const addSchedule = async ({ request,response }: {request:any, response: any }) 
     data.active = true;
     const schedule:Schedule = dataToSchedule(data);
     try{
+        console.log(schedule.idGroup)
+        const foundSchedule = await scheduleService.getSchedule(schedule.idGroup,schedule.idPeriod);
+        if(foundSchedule) throw new Error("ya exite un horario para este grupo en este periodo");
+        console.log(foundSchedule);
         const res = await scheduleService.addSchedule(schedule);
         schedule.idSchedule = res.lastInsertId;
+
         response.status = 201;
         response.body = schedule;
     }catch(e){
+        response.status = 400;
         response.body = {
             error:e.message
         }

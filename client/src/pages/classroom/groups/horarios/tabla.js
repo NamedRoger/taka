@@ -1,9 +1,8 @@
 
 import React from 'react';
-import Pagination from '../../../components/Pagination';
 import PropTypes from 'prop-types';
 import {Table} from '@themesberg/react-bootstrap'
-import { Link, Redirect,withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 // import { Routes } from "../../../routes";
 
 const TablaHorario = (props) => {

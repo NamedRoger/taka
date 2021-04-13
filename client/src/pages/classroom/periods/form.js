@@ -10,7 +10,8 @@ const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
                     <input className="form-control" 
                     name="name"
                     value={data.name} 
-                    onChange={(e) => {onChage(e.target)}}/>
+                    onChange={(e) => {onChage(e.target)}} 
+                    required/>
                 </div>
 
                 <div className="form-group">
@@ -19,7 +20,8 @@ const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
                     className="form-control"
                     name="initDate"
                     value={data.initDate}
-                    onChange={(e) => {onChage(e.target)}}/>
+                    onChange={(e) => {onChage(e.target)}}
+                    required/>
                 </div>
 
                 <div className="form-group">
@@ -27,7 +29,8 @@ const FormPeriodos = ({onSubmit,onChage,data,onReset}) => {
                     <input type="date" className="form-control"
                     name="finishDate"
                     value={data.finishDate}
-                    onChange={(e) => {onChage(e.target)}}/>
+                    onChange={(e) => {onChage(e.target)}}
+                    required/>
                 </div>
 
                 <div className="form-group mt-2">

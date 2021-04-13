@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Routes } from "../routes";
 
 // pages
-import Signin from "./examples/Signin";
+import Signin from "./auth/Signin";
 import ForgotPassword from "./examples/ForgotPassword";
 import ResetPassword from "./examples/ResetPassword";
 import Lock from "./examples/Lock";
@@ -25,6 +25,9 @@ import Horarios from './classroom/groups/horarios/horarios';
 import DashboardOverview from './classroom/students/DashboardOverview';
 import { Container } from '@themesberg/react-bootstrap';
 
+import { UserContext } from '../contexts/UserContext';
+import useUser from '../hooks/useUser';
+
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -34,12 +37,13 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
   }, []);
 
   return (
-    <Route {...rest} render={props => ( <> <Preloader show={loaded ? false : true} /> <Component {...props} /> </> ) } />
+    <Route {...rest} render={props => (<> <Preloader show={loaded ? false : true} /> <Component {...props} /> </>)} />
   );
 };
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
+  const { isLogged } = useUser();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
@@ -58,7 +62,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   }
 
   return (
-    <Route {...rest} render={props => (
+    <Route {...rest} render={props => isLogged ?
       <>
         <Preloader show={loaded ? false : true} />
         <Sidebar />
@@ -69,13 +73,15 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
           <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
         </main>
       </>
-    )}
+      :
+      <Redirect to='/login'></Redirect>}
     />
   );
 };
 
+
 const Home = () => {
-  return(
+  return (
     <Container>
       <h1>Bienvendio</h1>
     </Container>
@@ -83,29 +89,30 @@ const Home = () => {
 }
 
 export default () => (
-  <Switch>
-    <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
-    <RouteWithLoader exact path={Routes.ForgotPassword.path} component={ForgotPassword} />
-    <RouteWithLoader exact path={Routes.ResetPassword.path} component={ResetPassword} />
-    <RouteWithLoader exact path={Routes.Lock.path} component={Lock} />
-    <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
-    <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
+  <UserContext>
+    <Switch>
+      <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
+      <RouteWithLoader exact path={Routes.ForgotPassword.path} component={ForgotPassword} />
+      <RouteWithLoader exact path={Routes.ResetPassword.path} component={ResetPassword} />
+      <RouteWithLoader exact path={Routes.Lock.path} component={Lock} />
+      <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
+      <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
-    <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} />
-    <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+      <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} />
+      <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
 
-    {/* pages */}
-    <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} />
-    <RouteWithSidebar exact path={Routes.Materias.path} component={Materias} />
+      {/* pages */}
+      <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} />
+      <RouteWithSidebar exact path={Routes.Materias.path} component={Materias} />
 
-    {/* components */}
-
-    {/* documentation */}
-    <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} />
-    <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} />
-    <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} />
+      {/* documentation */}
+      <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} />
+      <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} />
+      <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} />
 
 
-    <Redirect to={Routes.NotFound.path} />
-  </Switch>
+      <Redirect to={Routes.NotFound.path} />
+    </Switch>
+  </UserContext>
+
 );

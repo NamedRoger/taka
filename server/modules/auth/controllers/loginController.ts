@@ -11,6 +11,7 @@ const login = async (ctx:RouterContext) => {
     try{
         const user = await getUserLogin(logingModel);
         if(user === null || user === undefined){
+            response.status = 400;
             response.body = {
                 error:"no existe el usuario"
             }
@@ -22,7 +23,7 @@ const login = async (ctx:RouterContext) => {
                     token:token
                 }
             }else{
-                response.status = 404;
+                response.status = 400;
                 response.body = {
                     error:"el password no es el correcto"
                 }
@@ -30,7 +31,7 @@ const login = async (ctx:RouterContext) => {
         }
     
     }catch(e){
-        response.status = 404;
+        response.status = 400;
         response.body = {
             error: e.message
         }
