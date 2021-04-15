@@ -34,10 +34,10 @@ const Horarios = ({match}) => {
     const {idGrupo} = match.params;
 
     const initPeriodo = {
-        idPeriod:0,
-        name:'',
-        initDate:'',
-        finishDate:''
+        idPeriodo:0,
+        nombre:'',
+        fechaInicio:'',
+        fechaFin:''
     }
 
     const [periodos,setPeriodos] = useState([]);
@@ -108,17 +108,17 @@ const Horarios = ({match}) => {
                     <div className="mt-4">
                         <div className="col">
                             Periodo:
-                            <select className="" value={periodo.idPeriod}  onChange={(e) => {
+                            <select className="" value={periodo.idPeriodo}  onChange={(e) => {
                                 setPeriodo({
                                     ...periodo,
-                                    idPeriod: Number(e.target.value)
+                                    idPeriodo: Number(e.target.value)
                                 });
                             }}>
                                     <option value={initPeriodo.idPeriod} >-- Selecciona el periodo --</option>
-                                    {periodos.map( p => <option key={p.idPeriod} value={p.idPeriod}>{p.name}</option>)}
+                                    {periodos.map( p => <option key={p.idPeriodo} value={p.idPeriodo}>{p.nombre}</option>)}
                             </select>
                             {
-                                !(periodo.idPeriod) ? 
+                                !(periodo.idPeriodo) ? 
                                 null
                                 :
                                 <button className="btn btn-sm btn-success">
@@ -133,7 +133,7 @@ const Horarios = ({match}) => {
                 <Col>
                 <div className="mt-4">
                     {
-                        periodo.idPeriod !== 0 ? 
+                        periodo.idPeriodo !== 0 ? 
                         <TablaHorario data={materias} onClick={onSelect}></TablaHorario>
                         :
                         <span>Selecciona un periodo</span>

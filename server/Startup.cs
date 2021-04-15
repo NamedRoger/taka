@@ -17,6 +17,8 @@ using Microsoft.IdentityModel.Tokens;
 using server.Models;
 using Microsoft.AspNetCore.Identity;
 using server.Helpers.User;
+using server.Helpers.Classroom;
+using server.Helpers.Alumno;
 
 namespace server
 {
@@ -26,6 +28,7 @@ namespace server
         {
             Configuration = configuration;
         }
+
 
         public IConfiguration Configuration { get; }
 
@@ -41,22 +44,24 @@ namespace server
             });
 
             services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(
-                              builder =>
-                              {
-                                  builder.AllowAnyOrigin()
-                                  .AllowAnyHeader()
-                                  .AllowAnyMethod();
-                              });
-        });
+            {
+                options.AddDefaultPolicy(
+                                builder =>
+                                {
+                                    builder.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                                });
+            });
 
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("Key"));
-            services.AddAuthentication(op => {
+            services.AddAuthentication(op =>
+            {
                 op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 op.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(op => {
+            .AddJwtBearer(op =>
+            {
                 op.SaveToken = true;
                 op.RequireHttpsMetadata = false;
                 op.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
@@ -69,7 +74,9 @@ namespace server
                 };
             });
 
-            services.AddScoped<IUserManager<Usuario,int>,UserManager>();
+            services.AddScoped<IUserManager<Usuario, int>, UserManager>();
+            services.AddScoped<IGrupoManager, GrupoManager>();
+            services.AddScoped<IAlumnoManager,AlumnoManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

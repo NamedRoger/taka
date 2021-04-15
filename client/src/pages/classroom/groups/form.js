@@ -27,7 +27,7 @@ const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
                     <label>Nombre</label>
                     <input className="form-control" 
                     name="nombre"
-                    value={data.name} 
+                    value={data.nombre} 
                     onChange={(e) => {onChage(e.target)}}/>
                 </div>
 

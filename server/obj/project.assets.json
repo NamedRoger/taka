@@ -4971,11 +4971,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rogelio Villarreal\\Desktop\\server\\server.csproj",
+      "projectUniqueName": "C:\\Users\\Rogelio Villarreal\\source\\repos\\taka\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "C:\\Users\\Rogelio Villarreal\\Desktop\\server\\server.csproj",
+      "projectPath": "C:\\Users\\Rogelio Villarreal\\source\\repos\\taka\\server\\server.csproj",
       "packagesPath": "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rogelio Villarreal\\Desktop\\server\\obj\\",
+      "outputPath": "C:\\Users\\Rogelio Villarreal\\source\\repos\\taka\\server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

@@ -16,15 +16,15 @@ const TablaGrupos = (props) => {
     
     const TableRow = (props) => {
         const {grupo} = props;
-        const linkTo = Routes.Grupos.children.horarios.replace(/:idGrupo/,grupo.idGroup);
+        const linkTo = Routes.Grupos.children.horarios.replace(/:idGrupo/,grupo.idGrupo);
         return(
             <tr>
-                <td>{grupo.name}</td>
+                <td>{grupo.nombre}</td>
                 <td>{grupo.code}</td>
-                <td>{grupo.speciality}</td>
+                <td>{grupo.especialidad.nombre}</td>
                 <td>
                     <button className="btn-primary" onClick={() => handleClick({
-                        id:grupo.idGroup,
+                        id:grupo.idGrupo,
                         operation:'edit'
                     })}>
                         editar
@@ -35,7 +35,7 @@ const TablaGrupos = (props) => {
                         horarios
                     </button>
                     <button className="btn-danger" onClick={() => handleClick({
-                        id:grupo.idGroup,
+                        id:grupo.idGrupo,
                         operation:'delete'
                     })}>
                         borrar
@@ -57,7 +57,7 @@ const TablaGrupos = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map(d => <TableRow key={d.idGroup} grupo={d}></TableRow>)}
+                {data.map(d => <TableRow key={d.idGrupo} grupo={d}></TableRow>)}
             </tbody>
         </Table>
         <Pagination totalRecords={totalRows} pageLimit={1}  pageNeighbours={1}/>

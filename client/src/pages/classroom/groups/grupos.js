@@ -19,15 +19,15 @@ const getGrupos = async () => {
 
 const Grupos = () => {
     const initGrupo = {
-        idGroup:0,
-        name:'',
-        idSpeciality:0
+        idGrupo:0,
+        nombre:'',
+        idEspecialidad:0
     }
     const [grupo,setGrupo] = useState(initGrupo);
     const [grupos,setGrupos] = useState([]);
 
     const onEdtiGrupo = async (id) => {
-        const grupo = grupos.find(p => p.idGroup === id);
+        const grupo = grupos.find(p => p.idGrupo === id);
         setGrupo({
             ...grupo
         });
@@ -66,10 +66,10 @@ const Grupos = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let res;
-        if(grupo.idGroup === 0){
+        if(grupo.idGrupo === 0){
             res = await serviceGrupos.addGrupo(grupo);
         }else{
-            res = await serviceGrupos.updateGrupo(grupo.idGroup,grupo);
+            res = await serviceGrupos.updateGrupo(grupo.idGrupo,grupo);
         }
 
         if(res.status === 200 || res.status === 201 || res.status === 204){

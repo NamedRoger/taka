@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "08iqP2OWF0NT/jmRemGVYT2wbD4qMER8PyyTsxcaxWfw+5xtOCiW80bqKDJ1dKOnLDoa97DnbfLjs8wZ2V8Ufw==",
+  "dgSpecHash": "qJ72rGtaubNW7KQ015cfZ/DuDfqB1X0J1AQe70cBNigTerc18e8Tx/kGxsMjof2/feONIjoUrWzqQFfRnvEtCw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rogelio Villarreal\\Desktop\\server\\server.csproj",
+  "projectFilePath": "C:\\Users\\Rogelio Villarreal\\source\\repos\\taka\\server\\server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
