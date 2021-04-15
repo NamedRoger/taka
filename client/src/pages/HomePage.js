@@ -27,6 +27,7 @@ import { Container } from '@themesberg/react-bootstrap';
 
 import { UserContext } from '../contexts/UserContext';
 import useUser from '../hooks/useUser';
+import Usuarios from './admin/usuarios/usuarios';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -109,6 +110,8 @@ export default () => (
       <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} />
       <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} />
       <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} />
+
+      <RouteWithSidebar exact path={Routes.Usuarios.path} component={Usuarios} />
 
 
       <Redirect to={Routes.NotFound.path} />

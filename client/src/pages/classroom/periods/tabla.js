@@ -18,18 +18,18 @@ const TablaPeriodos = (props) => {
         const {periodo} = props;
         return(
             <tr>
-                <td>{periodo.name}</td>
-                <td>{dayjs(`${periodo.initDate?periodo.initDate:null}`).format('DD/MM/YY')}</td>
-                <td>{dayjs(`${periodo.initDate?periodo.finishDate:null}`).format('DD/MM/YY')}</td>
+                <td>{periodo.nombre}</td>
+                <td>{dayjs(`${periodo.fechaInicio?periodo.fechaInicio:null}`).format('DD/MM/YY')}</td>
+                <td>{dayjs(`${periodo.fechaFin?periodo.fechaFin:null}`).format('DD/MM/YY')}</td>
                 <td>
                     <button className="btn-primary" onClick={() => handleClick({
-                        id:periodo.idPeriod,
+                        id:periodo.idPeriodo,
                         operation:'edit'
                     })}>
                         editar
                     </button>
                     <button className="btn-danger" onClick={() => handleClick({
-                        id:periodo.idPeriod,
+                        id:periodo.idPeriodo,
                         operation:'delete'
                     })}>
                         borrar
@@ -51,7 +51,7 @@ const TablaPeriodos = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map(d => <TableRow key={d.idPeriod} periodo={d}></TableRow>)}
+                {data.map(d => <TableRow key={d.idPeriodo} periodo={d}></TableRow>)}
             </tbody>
         </Table>
         <Pagination totalRecords={totalRows} pageLimit={1}  pageNeighbours={1}/>

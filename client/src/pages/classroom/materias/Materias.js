@@ -18,8 +18,8 @@ const getMaterias = async () => {
 
 export default function Materias() {
     const initMateria = {
-        idTopic:0,
-        name:''
+        idMateria:0,
+        nombre:''
     }
     const [materias, setMaterias] = useState([]);
     const [materia, setMateria] = useState(initMateria);
@@ -34,10 +34,10 @@ export default function Materias() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let res;
-        if(materia.idTopic === 0){
+        if(materia.idMateria === 0){
             res = await serviceMaterias.addMateria(materia);
         }else{
-            res = await serviceMaterias.updateMateria(materia.idTopic, materia);
+            res = await serviceMaterias.updateMateria(materia.idMateria, materia);
         }
 
         if(res.status === 200 || res.status === 201 || res.status === 204 ){
@@ -73,10 +73,10 @@ export default function Materias() {
 
     const onEdtiMateria = async (id) => {
         console.log(id);
-        const materia = materias.find(p => p.idTopic === id);
+        const materia = materias.find(p => p.idMateria === id);
         setMateria({
-            idTopic:materia.idTopic,
-            name:materia.name
+            idMateria:materia.idMateria,
+            nombre:materia.nombre
         });
 
     }

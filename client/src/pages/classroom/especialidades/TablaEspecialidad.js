@@ -10,13 +10,13 @@ const TablaEspecialidad = (props) => {
         const { especialidad } = props;
         return (
             <tr>
-                <td>{especialidad.name}</td>
-                <td>{especialidad.code}</td>
+                <td>{especialidad.nombre}</td>
+                <td>{especialidad.codigo}</td>
                 <td>
                     <button className="btn-primary"
                     onClick={() => {
                         onSelect({
-                            id:especialidad.idSpecialty,
+                            id:especialidad.idEspecialidad,
                             operation:'edit'
                         })
                     }}>
@@ -25,7 +25,7 @@ const TablaEspecialidad = (props) => {
                     <button className="btn-danger"
                     onClick={() => {
                         onSelect({
-                            id:especialidad.idSpecialty,
+                            id:especialidad.idEspecialidad,
                             operation:'delete'
                         })
                     }}>
@@ -47,7 +47,7 @@ const TablaEspecialidad = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((d, i) => <TableRow key={i} especialidad={d} />)}
+                    {data.map((d, i) => <TableRow key={d.idEspecialidad} especialidad={d} />)}
                 </tbody>
             </Table>
             <Pagination totalRecords={totalRows} pageLimit={20} pageNeighbours={1} />

@@ -16,6 +16,7 @@ export const Routes = {
     NotFound: { path: "/examples/404" },
     ServerError: { path: "/examples/500" },
 
+    Usuarios:{ path:'/admin/usuarios'},
     Especialidad: { path: "/classroom/especialidades" },
     Materias: { path: "/classroom/materias" },
     Grupos: { 

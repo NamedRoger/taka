@@ -1,6 +1,6 @@
 import http from '../helpers/http';
 
-const api_module = '/specialities';
+const api_module = '/especialidad';
 
 const getEspecialidades = async () => {
     const {data,status} = await http.get(`${api_module}`);

@@ -1,9 +1,9 @@
 import http from '../helpers/http';
 
-const api_modulue = `/topics`;
+const api_modulue = `/materia`;
 
 const getMaterias = async () => {
-    const {data,status} = await http.get('/topics');
+    const {data,status} = await http.get('/materia');
     if(status >= 300 && status <= 500) throw Error(status);
 
     return data;

@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Form, Button, Container, InputGroup } from '@themesberg/react-bootstrap';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import { Routes } from "../../routes";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
 import useUser from '../../hooks/useUser';
@@ -54,7 +53,13 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus onChange={setInput} value={ModelLogin.username} name="username" required type="email" placeholder="example@company.com" />
+                      <Form.Control autoFocus 
+                      onChange={setInput} 
+                      value={ModelLogin.username}
+                      name="username" 
+                      required 
+                      type="email" 
+                      placeholder="example@company.com" />
                     </InputGroup>
                   </Form.Group>
                   <Form.Group>
@@ -64,7 +69,13 @@ export default () => {
                         <InputGroup.Text>
                           <FontAwesomeIcon icon={faUnlockAlt} />
                         </InputGroup.Text>
-                        <Form.Control required onChange={setInput} value={ModelLogin.password} name="password" type="password" placeholder="Password" />
+                        <Form.Control 
+                        required 
+                        onChange={setInput} 
+                        value={ModelLogin.password} 
+                        name="password" 
+                        type="password" 
+                        placeholder="Password" />
                       </InputGroup>
                     </Form.Group>
                     {/* <div className="d-flex justify-content-between align-items-center mb-4">

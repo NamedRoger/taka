@@ -26,7 +26,7 @@ const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
                 <div className="form-group">
                     <label>Nombre</label>
                     <input className="form-control" 
-                    name="name"
+                    name="nombre"
                     value={data.name} 
                     onChange={(e) => {onChage(e.target)}}/>
                 </div>
@@ -34,11 +34,11 @@ const FormGrupos = ({onSubmit,onChage,data,onReset}) => {
                 <div className="form-group">
                     <label>Especialidad</label>
                     <select  className="form-control" 
-                    name="idSpeciality"
-                    value={data.idSpeciality} 
+                    name="idEspecialidad"
+                    value={data.idEspecialidad} 
                     onChange={(e) => {onChage(e.target)}}>
                         <option value={0}>-- Selecciona una especialidad --</option>
-                        {especialidades.map(e => <option key={e.idSpecialty} value={e.idSpecialty}>{e.name}</option>)}
+                        {especialidades.map(e => <option key={e.idEspecialidad} value={e.idEspecialidad}>{e.nombre}</option>)}
                     </select>
                 </div>
 

@@ -111,7 +111,7 @@ export default (props = {}) => {
               </CollapsableNavItem>
 
               <CollapsableNavItem eventKey="administracion/" title="Administracion" icon={faUserCog}>
-                <NavItem title="Usuarios" link={Routes.Periodos.path} />
+                <NavItem title="Usuarios" link={Routes.Usuarios.path} />
               </CollapsableNavItem>
 
               <Dropdown.Divider className="my-3 border-indigo" />

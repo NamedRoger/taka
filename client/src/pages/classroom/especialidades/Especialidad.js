@@ -18,8 +18,8 @@ const getEspecialidades = async () => {
 
 export default function Especialidad() {
     const initEspecialidad = {
-        idSpecialty:0,
-        name:'',
+        idEspecialidad:0,
+        nombre:'',
     }
     const [especialidades, setEspecialidades] = useState([]);
     const [especialidad, setEspecialidad] = useState(initEspecialidad);
@@ -40,15 +40,15 @@ export default function Especialidad() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(especialidad.idSpecialty === 0){
+        if(especialidad.idEspecialidad === 0){
             const res = await serviceEspecialidades.addEspecialidad(especialidad);
-            if(res.status === 201) {
+            if(res.status === 201 || res.status === 200 || res.status == 204) {
                 await setEspecialidades(await getEspecialidades());
                 onReset();
             }
             else alert('Ocurrio un error');
         }else{
-            const res = await serviceEspecialidades.updateEspecialidad(especialidad.idSpecialty,especialidad);
+            const res = await serviceEspecialidades.updateEspecialidad(especialidad.idEspecialidad,especialidad);
             if(res.status === 204) {
                 await setEspecialidades(await getEspecialidades())
                 onReset();
@@ -63,7 +63,7 @@ export default function Especialidad() {
 
     
     const onEdtiEspecialidad = async (id) => {
-        const especialidad = especialidades.find(p => p.idSpecialty === id);
+        const especialidad = especialidades.find(p => p.idEspecialidad === id);
         setEspecialidad({
             ...especialidad
         });

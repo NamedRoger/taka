@@ -12,12 +12,12 @@ const TablaEspecialidad = (props) => {
         const {data} = props;
         return(
             <tr>
-                <td>{data.name}</td>
+                <td>{data.nombre}</td>
                 <td>
                     <button className="btn-primary"
                     onClick={() => {
                         onSelect({
-                            id:data.idTopic,
+                            id:data.idMateria,
                             operation:'edit'
                         })
                     }}>
@@ -26,7 +26,7 @@ const TablaEspecialidad = (props) => {
                     <button className="btn-danger"
                     onClick={() => {
                         onSelect({
-                            id:data.idTopic,
+                            id:data.idMateria,
                             operation:'delete'
                         })
                     }}>

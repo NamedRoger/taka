@@ -18,26 +18,27 @@ const getPeriodos = async () => {
 
 const Periodos = () => {
     const initPeriodo = {
-        idPeriod:0,
-        name:'',
-        initDate:'',
-        finishDate:''
+        idPeriodo:0,
+        nombre:'',
+        fechaInicio:'',
+        fechaFin:''
     }
     const [periodos,setPeriodos] = useState([]);
     const [periodo,setPeriodo] = useState(initPeriodo);
 
 
     const onEdtiPeriodo = async (id) => {
-        const periodo = periodos.find(p => p.idPeriod === id);
+        const periodo = periodos.find(p => p.idPeriodo === id);
         setPeriodo({
             ...periodo,
-            finishDate:periodo.finishDate?dayjs(periodo.finishDate).format('YYYY-MM-DD'):'',
-            initDate:periodo.initDate?dayjs(periodo.initDate).format('YYYY-MM-DD'):''
+            fechaFin:periodo.fechaFin?dayjs(periodo.fechaFin).format('YYYY-MM-DD'):'',
+            fechaInicio:periodo.fechaInicio?dayjs(periodo.fechaInicio).format('YYYY-MM-DD'):''
         });
     }
     
     const onDeletePeriodo = async (id) => {
         const res = await servicePeriodos.deletePeriodo(id);
+        console.log(id);
         if(res.status === 204){
             setPeriodos(await getPeriodos());
             onReset();
@@ -65,10 +66,10 @@ const Periodos = () => {
         e.preventDefault();
         let res;
         try{
-            if(periodo.idPeriod === 0){
+            if(periodo.idPeriodo === 0){
                 res = await servicePeriodos.addPeriod(periodo);
             }else {
-                res = await servicePeriodos.updatePeriodo(periodo.idPeriod,periodo);
+                res = await servicePeriodos.updatePeriodo(periodo.idPeriodo,periodo);
             }
             
             if(res.status === 200 || res.status === 201 || res.status === 204 ){

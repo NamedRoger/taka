@@ -1,9 +1,9 @@
 import http from '../helpers/http';
 
-const api_module = '/groups';
+const api_module = '/grupo';
 
 const getGrupos = async () => {
-    const {data,status} = await http.get('/groups');
+    const {data,status} = await http.get('/grupo');
     if(status >= 300 && status <= 500) throw Error(status);
 
     return data;

@@ -13,8 +13,8 @@ export default function Form({data, onChange, onSubmit,onReset}) {
                     id="inputPassword5" 
                     className="form-control" 
                     aria-describedby="passwordHelpBlock" 
-                    name="name"
-                    value={data.name} 
+                    name="nombre"
+                    value={data.nombre} 
                     onChange={(e) => {onChange(e.target)}} 
                     required/>
                 </div>
