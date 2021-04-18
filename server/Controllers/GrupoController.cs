@@ -102,5 +102,27 @@ namespace server.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("{idGrupo}/periodo/{idPeriodo}")]
+        public async Task<IEnumerable<Horario>> GetHorariosAsync(int idGrupo, int idPeriodo){
+            var horarios = await context.Horarios.Where(h => h.IdGrupo == idGrupo && h.IdPeriodo == idPeriodo)
+                .ToListAsync();
+            return horarios;
+        }
+
+        [HttpPost]
+        [Route("{idGrupo}/periodo/{idPeriodo}")]
+        public async Task<ActionResult<Horario>> AddHorarioAsync(int idGrupo, int idPeriodo,
+        [FromBody] Horario horario){
+            try{
+                await context.Horarios.AddAsync(horario);
+                await context.SaveChangesAsync();
+                return Ok(horario);
+            }catch(Exception e){
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }
