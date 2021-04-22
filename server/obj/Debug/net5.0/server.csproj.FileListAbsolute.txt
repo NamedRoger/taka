@@ -258,3 +258,6 @@ C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\ref\server
 C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\server.pdb
 C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\server.genruntimeconfig.cache
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\BCrypt.Net-Core.dll
+C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

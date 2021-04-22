@@ -7,7 +7,6 @@ import TablaHorario from './tabla';
 import ModalClase from './modal-clase';
 
 import * as periodosService from '../../../../services/periodos';
-import * as grupoService from '../../../../services/grupos';
 import * as horarioService from '../../../../services/horarios';
 
 
@@ -18,10 +17,6 @@ const getPeriodos = async () => {
     } catch (e) {
     }
     return periodos;
-}
-
-const getHorario = (idGrupo, idPeriodo) => {
-    return grupoService.getHorario(idGrupo, idPeriodo);
 }
 
 const Horarios = ({ match }) => {
@@ -38,7 +33,8 @@ const Horarios = ({ match }) => {
         idCalse: 0,
         idMateria: 0,
         idMaestro: 0,
-        idHorario: 0
+        idGrupo:0,
+        idPeriodo:0
     }
 
     const [periodos, setPeriodos] = useState([]);
@@ -48,16 +44,14 @@ const Horarios = ({ match }) => {
     const [clases, setClases] = useState([]);
     const [clase, setClase] = useState(initClase);
 
-    const [horario, setHorario] = useState({});
-
     useEffect(() => {
         (async () => {
             setPeriodos(await getPeriodos());
         })();
     }, [setPeriodos]);
 
-    const getClases = useCallback((idHorario) => {
-        horarioService.getClases(idHorario).then(res => {
+    const getHorario = useCallback((idGrupo, idPeriodo) => {
+        horarioService.getClases(idGrupo, idPeriodo).then(res => {
             setClases(res.data);
         })
     }, []);
@@ -70,63 +64,35 @@ const Horarios = ({ match }) => {
         });
 
         if (idPeriodo !== 0) {
-            getHorario(idGrupo, idPeriodo).then(res => {
-                setHorario(res.data);
-                setClase({
-                    ...clase,
-                    idHorario: res.data.idHorario
-                });
-                getClases(res.data.idHorario);
-            })
-                .catch(err => {
-                    const { response } = err;
-                    if (response.status === 404) {
-                        setHorario(null);
-                        setClase(initClase);
-                    } else {
-                        alert('Ocurrió un error');
-                    }
-                });
+            getHorario(Number(idGrupo), idPeriodo);
         }
     }
-
-    const AddHorario = useCallback(() => {
-        grupoService.addHorario(idGrupo, periodo.idPeriodo).then(res => {
-            getHorario(idGrupo, periodo.idPeriodo).then(res => setHorario(res.data));
-        })
-            .catch(err => {
-                alert("No se pudo agregar el horario");
-                setHorario(null);
-            });
-    }, [idGrupo, periodo]);
 
     const onHide = useCallback(() => {
         setShowModal(false);
         setClase({
-            ...clase,
-            idMaestro: 0,
-            idCalse: 0,
-            idMateria: 0
+            ...initClase,
+            idGrupo: Number(idGrupo),
+            idPeriodo: periodo.idPeriodo  
         })
-    }, [setClase, setShowModal, clase])
+    }, [initClase, idGrupo, periodo.idPeriodo])
 
-    const onSubmitAddClass = useCallback((e) => {
+    const onSubmitAddClass =(e) => {
         e.preventDefault();
         if (clase.idCalse === 0) {
-            horarioService.addClase(horario.idHorario, clase).then(res => {
-                getClases(horario.idHorario);
+            horarioService.addClase(Number(idGrupo), periodo.idPeriodo, clase).then(res => {
+                getHorario(Number(idGrupo), periodo.idPeriodo);
                 onHide();
             });
 
         } else {
-            console.log(clase);
-            horarioService.updateClase(horario.idHorario, clase.idClase, clase).then(res => {
-                getClases(horario.idHorario);
+            horarioService.updateClase(Number(idGrupo), periodo.idPeriodo, clase.idClase, clase).then(res => {
+                getHorario(Number(idGrupo), periodo.idPeriodo);
                 onHide();
             });
         }
 
-    }, [horario, clase, getClases, onHide]);
+    };
 
     const handleEditClass = (id) => {
         const foundClase = clases.find(c => c.idClase === id);
@@ -135,23 +101,13 @@ const Horarios = ({ match }) => {
     }
 
     const AgregarHorarioMateria = (props) => {
-        const { horaio } = props;
         return (
             <div className="mt-3">
-                {
-                    horaio ?
-                        <button className="btn btn-sm btn-success" onClick={() => {
-                            setShowModal(true);
-                        }}>
-                            Agregar Clase
+                <button className="btn btn-sm btn-success" onClick={() => {
+                    setShowModal(true);
+                }}>
+                    Agregar Clase
                         </button>
-                        :
-                        <button className="btn btn-sm btn-success" onClick={() => {
-                            AddHorario();
-                        }}>
-                            Agregar Horario
-                        </button>
-                }
             </div>
         );
     }
@@ -182,7 +138,7 @@ const Horarios = ({ match }) => {
                                 !(periodo.idPeriodo) ?
                                     <></>
                                     :
-                                    <AgregarHorarioMateria horaio={horario}></AgregarHorarioMateria>
+                                    <AgregarHorarioMateria></AgregarHorarioMateria>
                             }
 
 
@@ -194,7 +150,7 @@ const Horarios = ({ match }) => {
                         {
                             periodo.idPeriodo === 0 ?
                                 <span>Selecciona un periodo</span>
-                                : <TablaHorario horario={horario} data={clases}  handleEdit={handleEditClass}></TablaHorario>
+                                : <TablaHorario data={clases} handleEdit={handleEditClass}></TablaHorario>
                         }
                     </div>
                 </Col>
@@ -208,10 +164,11 @@ const Horarios = ({ match }) => {
                     setClase({
                         ...clase,
                         [name]: value,
-                        idHorario: horario.idHorario
+                        idGrupo: Number(idGrupo),
+                        idPeriodo: periodo.idPeriodo
                     });
                 }}
-                ></ModalClase>
+            ></ModalClase>
         </Container>
     );
 }

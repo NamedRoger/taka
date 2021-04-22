@@ -2,15 +2,15 @@ import http from '../helpers/http';
 
 const api_module = '/horario';
 
-const getClases = (idHorario) => {
-    return http.get(`${api_module}/${idHorario}/clases`);
+const getClases = (idGrupo,idPeriodo) => {
+    return http.get(`${api_module}/grupo/${idGrupo}/periodo/${idPeriodo}/clases`);
 }
-const addClase  = (idHorario,clase) => {
-    return http.post(`${api_module}/${idHorario}/clases`,clase);
+const addClase  = (idGrupo,idPeriodo,clase) => {
+    return http.post(`${api_module}/grupo/${idGrupo}/periodo/${idPeriodo}/clases`,clase);
 }
 
-const updateClase = (idHorario,idClase,clase) => {
-    return http.put(`${api_module}/${idHorario}/clases/${idClase}`,clase);
+const updateClase = (idGrupo,idPeriodo,idClase,clase) => {
+    return http.put(`${api_module}/grupo/${idGrupo}/periodo/${idPeriodo}/clases/${idClase}`,clase);
 }
 
 const removeClase = () => {

@@ -11,8 +11,9 @@ namespace server.Models
         public Clase Clase {get;set;}
         public int IdAlumno { get; set; }
         public Usuario Alumno {get;set;}
-        public double? Parcial1 { get; set; }
-        public double? Parcial2 { get; set; }
-        public double? Parcial3 { get; set; }
+        public double? Parcial1 { get; set; } = 0;
+        public double? Parcial2 { get; set; } = 0;
+        public double? Parcial3 { get; set; } = 0;
+        public double Calificacion {get;set;} = 0;
     }
 }

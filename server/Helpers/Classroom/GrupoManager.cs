@@ -50,8 +50,8 @@ namespace server.Helpers.Classroom
         public async Task AgregarClase(int idGrupo, int idPeriodo, Clase clase)
         {
             var materia = await context.Materias.FindAsync(clase.IdMateria);
-            var grupo = ObtenerGrupo(idGrupo);
-            var periodo = ObtenerPeriodo(idPeriodo);
+            var grupo = await ObtenerGrupo(idGrupo);
+            var periodo = await ObtenerPeriodo(idPeriodo);
 
             if(materia == null) throw new System.Exception("No existe la materia");
             if(grupo == null) throw new System.Exception("No existe el grupo");
@@ -67,7 +67,6 @@ namespace server.Helpers.Classroom
         {
             clase.Activo = false;
             await context.SaveChangesAsync();
-
         }
 
         public async Task<bool> ExisteGrupo(int idGrupo)

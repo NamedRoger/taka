@@ -270,7 +270,7 @@ namespace server
 
                 entity.ToTable("usuarios");
 
-                entity.HasIndex(u => u.Email)
+                entity.HasIndex(u => u.UserName)
                     .IsUnique();
                 
                 entity.HasIndex(u => u.Matricula)
@@ -303,9 +303,9 @@ namespace server
                     .HasCharSet("latin1")
                     .HasCollation("latin1_swedish_ci");
 
-                entity.Property(e => e.Email)
+                entity.Property(e => e.UserName)
                     .HasColumnType("varchar(50)")
-                    .HasColumnName("email")
+                    .HasColumnName("username")
                     .HasCharSet("latin1")
                     .HasCollation("latin1_swedish_ci");
 

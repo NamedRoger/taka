@@ -62,9 +62,8 @@ namespace server.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,usuario.Email),
+                new Claim(ClaimTypes.Name,usuario.UserName),
                 new Claim(ClaimTypes.Role,usuario.Role.Nombre),
-                new Claim(ClaimTypes.Email,usuario.Email)
             };
 
             var claimIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);

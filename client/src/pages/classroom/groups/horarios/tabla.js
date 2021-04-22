@@ -2,18 +2,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from '@themesberg/react-bootstrap'
-import { withRouter } from 'react-router-dom';
+import { withRouter,Link } from 'react-router-dom';
 // import { Routes } from "../../../routes";
 
 const TablaHorario = (props) => {
-    const { horario, data, handleEdit } = props;
+    const { data, handleEdit } = props;
 
     const TableRow = (props) => {
         const { clase } = props;
-        console.log(clase.maestro);
+
         return (
             <tr>
-                <td>{clase.materia.nombre}</td>
+                <td>
+                    <Link to={`/classroom/grupos/${clase.idGrupo}/clase/${clase.idClase}`} href>{clase.materia.nombre}</Link> 
+                </td>
                 <td>{clase.maestro.nombre}</td>
                 <td>
                     <button className="btn-primary" onClick={() => { props.onEdit(clase.idClase)}}>
@@ -38,7 +40,7 @@ const TablaHorario = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map(d => <TableRow key={d.idMateria} clase={d} onEdit={handleEdit}></TableRow>)}
+                    {data.map(d => <TableRow key={d.idClase} clase={d} onEdit={handleEdit}></TableRow>)}
                 </tbody>
             </Table>
         );
@@ -46,9 +48,7 @@ const TablaHorario = (props) => {
 
     return (
         <>
-            {horario ? <TableHor></TableHor>:<span>Arega un horaio</span>
-        
-        }
+            <TableHor></TableHor>
         </>
     );
 

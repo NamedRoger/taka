@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uE7vpIf1Z/msQTpXznHb6G9DHTZ1BM+p5wcP449pwkH+70gQY+b4m06HAuVLiLnGydqkLtNsJUuKHuXjFeFXWA==",
+  "dgSpecHash": "t3cYQaA3kkbiWkEh/mCqfNSy9IJaJ0Ymf+0tGZn4NBYeujb8lMl7bLVHDRrxYJNaVVAGQ0vlNVnE4RhRvXGvIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rogelio Villarreal\\source\\repos\\taka\\server\\server.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.2\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\5.0.2\\microsoft.aspnetcore.identity.ui.5.0.2.nupkg.sha512",
+    "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.2\\microsoft.aspnetcore.jsonpatch.5.0.2.nupkg.sha512",
+    "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.2\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\5.0.0\\microsoft.aspnetcore.razor.language.5.0.0.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
@@ -59,7 +61,8 @@
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.utils\\5.0.2\\microsoft.visualstudio.web.codegeneration.utils.5.0.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\5.0.2\\microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\mysqlconnector\\1.1.0\\mysqlconnector.1.1.0.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\5.0.0-alpha.2\\pomelo.entityframeworkcore.mysql.5.0.0-alpha.2.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\Rogelio Villarreal\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

@@ -23,6 +23,7 @@ export const Routes = {
         path: "/classroom/grupos",
         children:{
             horarios:"/classroom/grupos/:idGrupo/horarios",
+            clase:"/classroom/grupos/:idGrupo/clase/:idClase"
         }
     },
     Periodos: {

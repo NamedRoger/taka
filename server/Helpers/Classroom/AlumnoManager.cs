@@ -6,22 +6,22 @@ namespace server.Helpers.Alumno
 {
     public class AlumnoManager : IAlumnoManager
     {
-        public Task AddCalification(Usuario usuario, Clase clase, TypeCalificacion typeCalificacion)
+        public async Task AddCalification(Usuario usuario, Clase clase, TypeCalificacion typeCalificacion)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task AddHorario(Usuario usuario, Horario horario)
+        public async Task AddHorario(Usuario usuario, int idGrupo ,int idPeriodo)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task AddToClass(Usuario usuario, Clase clase)
+        public async Task AddToClass(Usuario usuario, Clase clase)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task RemoveToClass(Usuario usuario, Clase clase)
+        public async Task RemoveToClass(Usuario usuario, Clase clase)
         {
             throw new System.NotImplementedException();
         }

@@ -45,9 +45,8 @@ namespace server.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Usuario usuario)
         {
-            if(usuario.Email == null)
+            if(usuario.UserName == null)
                 return BadRequest("Llene el campo UserName");
-
             try{
                 await userMananger.AddUser(usuario);
                 return Ok();
@@ -58,9 +57,10 @@ namespace server.Controllers
 
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] Usuario usuario)
         {
             try{
+                await userMananger.UpdateUser(id,usuario);
                 return NoContent();
             }catch(Exception e){
                 return BadRequest(e.Message);
@@ -72,7 +72,8 @@ namespace server.Controllers
         public async Task<IActionResult> Desactive(int id)
         {
             try{
-
+                var usuario = await context.Usuarios.FindAsync(id);
+                await userMananger.DesactiveUser(usuario);
                 return NoContent();
             }catch(Exception e){
                 return BadRequest(e.Message);

@@ -30,6 +30,7 @@ namespace server.Controllers
         [HttpGet]
         public async Task<IEnumerable<Grupo>> Get()
         {
+            var p = User.Identity.Name;
             var grupos = await context.Grupos.Where(g => g.Activo)
                 .Include(g => g.Especialidad)
                 .ToListAsync();
@@ -101,30 +102,6 @@ namespace server.Controllers
                 
                 await context.SaveChangesAsync();
                 return NoContent();
-            }catch(Exception e){
-                return BadRequest(e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("{idGrupo}/periodo/{idPeriodo}/horario")]
-        public async Task<ActionResult<Horario>> GetHorarioAsync(int idGrupo, int idPeriodo){
-            var horario = await context.Horarios.Where(h => h.IdGrupo == idGrupo && h.IdPeriodo == idPeriodo)
-                .SingleOrDefaultAsync();
-            if(horario == null) return NotFound("No existe el horario");
-            return horario;
-        }
-
-        [HttpPost]
-        [Route("{idGrupo}/periodo/{idPeriodo}/horario")]
-        public async Task<ActionResult<Horario>> AddHorarioAsync(int idGrupo, int idPeriodo){
-            try{
-                var grupo = await grupoManager.ObtenerGrupo(idGrupo);
-                var periodo = await grupoManager.ObtenerPeriodo(idPeriodo);
-
-                // await grupoManager.AddHorario(grupo,periodo);
-                return Ok();
-
             }catch(Exception e){
                 return BadRequest(e.Message);
             }

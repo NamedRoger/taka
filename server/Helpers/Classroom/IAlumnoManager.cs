@@ -6,9 +6,9 @@ namespace server.Helpers.Alumno
 {
     public interface IAlumnoManager
     {
-        Task AddToClass(Usuario usuario, Clase clase);
-        Task RemoveToClass(Usuario usuario, Clase clase);
-        Task AddHorario(Usuario usuario, Horario horario);
+        Task AddToClass(Usuario alumno, Clase clase);
+        Task RemoveToClass(Usuario alumno, Clase clase);
+        Task AddHorario(Usuario usuario, int idGrupo ,int idPeriodo);
         Task AddCalification(Usuario usuario, Clase clase,TypeCalificacion typeCalificacion);
         Task<bool> ExistMatricula(string matricula);
     }

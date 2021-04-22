@@ -16,26 +16,27 @@ namespace server.Helpers.User
 
         public async Task AddUser(Usuario user)
         {
-            if((await FindUser(user.Email)) != null) throw new System.Exception("Ya existe el usuario");
+            if((await FindUser(user.UserName)) != null) throw new System.Exception("Ya existe el usuario");
             var role = await FindRole(user.IdRole);
-            user.Email = user.Email.Trim();
+            user.UserName = user.UserName.Trim();
             user.Role = role;
             user.Password = HashPassword(user.Password);
-            user.UserNameNormalize = user.Email.ToUpper().Trim();
+            user.UserNameNormalize = user.UserName.ToUpper().Trim();
             user.Activo = true;
 
             await context.AddAsync(user);
             await context.SaveChangesAsync();
         }
 
-        public Task ChangePassword(Usuario user, string password)
+        public async Task ChangePassword(Usuario user, string password)
         {
-            throw new System.NotImplementedException();
+            user.Password = HashPassword(password);
+            await context.SaveChangesAsync();
         }
 
         public async Task DesactiveUser(Usuario usuario)
         {
-            var foundUser = await FindUser(usuario.Email);
+            var foundUser = await FindUser(usuario.UserName);
             if(foundUser == null) throw new System.Exception("No se encontro el usuario");
             foundUser.Activo = false;
             await context.SaveChangesAsync();
@@ -50,9 +51,22 @@ namespace server.Helpers.User
             return usuario;
         }
 
-        public Task UpdateUser(int key, Usuario user)
+        public async Task UpdateUser(int key, Usuario user)
         {
-            throw new System.NotImplementedException();
+            var foundUser = await context.Usuarios.FindAsync(key);
+            if(!(foundUser.UserNameNormalize == user.UserName.ToUpper().Trim())){
+                if((await FindUser(user.UserName)) != null) throw new System.Exception("Ya existe el usuario");   
+            }
+            
+            foundUser.UserName = user.UserName;
+            foundUser.UserNameNormalize = user.UserName.ToUpper().Trim();
+            foundUser.ApellidoMaterno = user.ApellidoMaterno;
+            foundUser.ApellidoPaterno = user.ApellidoPaterno;
+            foundUser.Curp = user.Curp;
+            foundUser.Matricula = user.Matricula;
+            foundUser.Nombre = user.Nombre;
+
+            await context.SaveChangesAsync();
         }
 
         private async Task<Role> FindRole(int id){

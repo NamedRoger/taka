@@ -28,6 +28,7 @@ import { Container } from '@themesberg/react-bootstrap';
 import { UserContext } from '../contexts/UserContext';
 import useUser from '../hooks/useUser';
 import Usuarios from './admin/usuarios/usuarios';
+import Clase from './classroom/groups/clase/clase';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -118,6 +119,7 @@ export default () => (
       <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} roles="Administrador" />
       <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} roles={["Administrador"]} />
       <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} roles={["Administrador"]} />
+      <RouteWithSidebar exact path={Routes.Grupos.children.clase} component={Clase} roles={["Administrador"]} />
       <RouteWithSidebar exact path={Routes.Usuarios.path} component={Usuarios} roles={["Administrador"]} />
 
 

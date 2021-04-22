@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Identity;
 using server.Helpers.User;
 using server.Helpers.Classroom;
 using server.Helpers.Alumno;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Serialization;
 
 namespace server
 {
@@ -37,7 +39,9 @@ namespace server
         {
             services.AddDbContext<takaContext>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(op => {
+                op.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "server", Version = "v1" });

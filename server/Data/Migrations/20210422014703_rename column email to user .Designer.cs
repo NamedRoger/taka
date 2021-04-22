@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using server;
 
 namespace server.Data.Migrations
 {
     [DbContext(typeof(takaContext))]
-    partial class takaContextModelSnapshot : ModelSnapshot
+    [Migration("20210422014703_rename column email to user ")]
+    partial class renamecolumnemailtouser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,9 +96,6 @@ namespace server.Data.Migrations
 
                     b.Property<int>("IdClase")
                         .HasColumnType("int(11)");
-
-                    b.Property<double>("Calificacion")
-                        .HasColumnType("double");
 
                     b.Property<decimal?>("Parcial1")
                         .HasColumnType("decimal(5,2)");
