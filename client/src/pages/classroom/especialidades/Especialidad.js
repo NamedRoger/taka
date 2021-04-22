@@ -42,7 +42,7 @@ export default function Especialidad() {
         e.preventDefault();
         if(especialidad.idEspecialidad === 0){
             const res = await serviceEspecialidades.addEspecialidad(especialidad);
-            if(res.status === 201 || res.status === 200 || res.status == 204) {
+            if(res.status === 201 || res.status === 200 || res.status === 204) {
                 await setEspecialidades(await getEspecialidades());
                 onReset();
             }

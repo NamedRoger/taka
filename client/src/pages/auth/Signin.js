@@ -9,24 +9,25 @@ import BgImage from "../../assets/img/illustrations/signin.svg";
 
 import useUser from '../../hooks/useUser';
 
-export default () => {
+export default (props) => {
   const initLogin = {
     username:'',
     password:''
   }
 
-  const {login,isLogged} = useUser();
+  const {login,isLogged,error} = useUser();
   const history = useHistory();
 
   useEffect(() => {
     if(isLogged) history.push('/');
-  },[isLogged,history]);
+    if(!error.success) alert(error.error);
+  },[isLogged,history,error]);
 
 
   const [ModelLogin,setLogin] = useState(initLogin);
   const onSubmit = async (e) => {
     e.preventDefault();
-    login(ModelLogin)
+    await login(ModelLogin);
   }
 
   const setInput = (e) => {
@@ -78,13 +79,6 @@ export default () => {
                         placeholder="Password" />
                       </InputGroup>
                     </Form.Group>
-                    {/* <div className="d-flex justify-content-between align-items-center mb-4">
-                      <Form.Check type="checkbox">
-                        <FormCheck.Input id="defaultCheck5" className="me-2" />
-                        <FormCheck.Label htmlFor="defaultCheck5" className="mb-0">Remember me</FormCheck.Label>
-                      </Form.Check>
-                      <Card.Link className="small text-end">Lost password?</Card.Link>
-                    </div> */}
                   </Form.Group>
                   <Button variant="primary" type="submit" className="w-100">
                     Sign in

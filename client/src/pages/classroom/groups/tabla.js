@@ -20,7 +20,7 @@ const TablaGrupos = (props) => {
         return(
             <tr>
                 <td>{grupo.nombre}</td>
-                <td>{grupo.code}</td>
+                <td>{grupo.codigo}</td>
                 <td>{grupo.especialidad.nombre}</td>
                 <td>
                     <button className="btn-primary" onClick={() => handleClick({

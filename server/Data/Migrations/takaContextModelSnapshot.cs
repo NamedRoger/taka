@@ -39,8 +39,10 @@ namespace server.Data.Migrations
                         .HasColumnType("int(11)")
                         .HasColumnName("id_clase");
 
-                    b.Property<sbyte?>("Activo")
+                    b.Property<sbyte>("Activo")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(4)")
+                        .HasDefaultValue((sbyte)1)
                         .HasColumnName("activo");
 
                     b.Property<TimeSpan?>("HoraFin")
@@ -51,9 +53,8 @@ namespace server.Data.Migrations
                         .HasColumnType("time")
                         .HasColumnName("hora_inicio");
 
-                    b.Property<int?>("IdHorario")
-                        .HasColumnType("int(11)")
-                        .HasColumnName("id_horario");
+                    b.Property<int>("IdGrupo")
+                        .HasColumnType("int(11)");
 
                     b.Property<int?>("IdMaestro")
                         .HasColumnType("int(11)")
@@ -62,6 +63,9 @@ namespace server.Data.Migrations
                     b.Property<int?>("IdMateria")
                         .HasColumnType("int(11)")
                         .HasColumnName("id_materia");
+
+                    b.Property<int>("IdPeriodo")
+                        .HasColumnType("int(11)");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("varchar(50)")
@@ -72,11 +76,13 @@ namespace server.Data.Migrations
                     b.HasKey("IdClase")
                         .HasName("PRIMARY");
 
-                    b.HasIndex("IdHorario");
+                    b.HasIndex("IdGrupo");
 
                     b.HasIndex("IdMaestro");
 
                     b.HasIndex("IdMateria");
+
+                    b.HasIndex("IdPeriodo");
 
                     b.ToTable("clase");
                 });
@@ -113,7 +119,9 @@ namespace server.Data.Migrations
                         .HasColumnName("id_especialidad");
 
                     b.Property<sbyte>("Activo")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(4)")
+                        .HasDefaultValue((sbyte)1)
                         .HasColumnName("activo");
 
                     b.Property<string>("Codigo")
@@ -144,8 +152,8 @@ namespace server.Data.Migrations
                     b.Property<sbyte>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(4)")
-                        .HasColumnName("activo")
-                        .HasDefaultValueSql("'1'");
+                        .HasDefaultValue((sbyte)1)
+                        .HasColumnName("activo");
 
                     b.Property<string>("Codigo")
                         .HasColumnType("varchar(50)")
@@ -178,8 +186,10 @@ namespace server.Data.Migrations
                         .HasColumnType("int(11)")
                         .HasColumnName("id_horario");
 
-                    b.Property<sbyte?>("Activo")
+                    b.Property<sbyte>("Activo")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(4)")
+                        .HasDefaultValue((sbyte)1)
                         .HasColumnName("activo");
 
                     b.Property<int>("IdGrupo")
@@ -210,8 +220,8 @@ namespace server.Data.Migrations
                     b.Property<sbyte>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(4)")
-                        .HasColumnName("activo")
-                        .HasDefaultValueSql("'1'");
+                        .HasDefaultValue((sbyte)1)
+                        .HasColumnName("activo");
 
                     b.Property<string>("Codigo")
                         .HasColumnType("varchar(50)")
@@ -291,7 +301,9 @@ namespace server.Data.Migrations
                         .HasColumnName("id_usuario");
 
                     b.Property<sbyte>("Activo")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(4)")
+                        .HasDefaultValue((sbyte)1)
                         .HasColumnName("activo");
 
                     b.Property<string>("ApellidoMaterno")
@@ -347,6 +359,9 @@ namespace server.Data.Migrations
 
                     b.HasIndex("IdRole");
 
+                    b.HasIndex("Matricula")
+                        .IsUnique();
+
                     b.ToTable("usuarios");
                 });
 
@@ -367,9 +382,11 @@ namespace server.Data.Migrations
 
             modelBuilder.Entity("server.Models.Clase", b =>
                 {
-                    b.HasOne("server.Models.Horario", "Horario")
+                    b.HasOne("server.Models.Grupo", "Grupo")
                         .WithMany()
-                        .HasForeignKey("IdHorario");
+                        .HasForeignKey("IdGrupo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("server.Models.Usuario", "Maestro")
                         .WithMany()
@@ -379,11 +396,19 @@ namespace server.Data.Migrations
                         .WithMany()
                         .HasForeignKey("IdMateria");
 
-                    b.Navigation("Horario");
+                    b.HasOne("server.Models.Periodo", "Periodo")
+                        .WithMany()
+                        .HasForeignKey("IdPeriodo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grupo");
 
                     b.Navigation("Maestro");
 
                     b.Navigation("Materia");
+
+                    b.Navigation("Periodo");
                 });
 
             modelBuilder.Entity("server.Models.ClaseAlumno", b =>

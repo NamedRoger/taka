@@ -25,5 +25,10 @@ namespace server.Helpers.Alumno
         {
             throw new System.NotImplementedException();
         }
+
+        public async Task<bool> ExistMatricula(string matricula)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

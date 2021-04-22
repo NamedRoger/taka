@@ -2,45 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using server.Helpers.Classroom;
+using server.Models;
 
 namespace server.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class HorarioController : ControllerBase
     {
-        // GET: api/Horario
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly takaContext context;
+        private readonly IGrupoManager grupoManager;
 
-        // GET: api/Horario/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        public HorarioController(takaContext context, IGrupoManager grupoManager)
         {
-            return "value";
-        }
-
-        // POST: api/Horario
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Horario/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Horario/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            this.context = context;
+            this.grupoManager = grupoManager;
         }
     }
 }

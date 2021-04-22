@@ -1,24 +1,34 @@
 import { useContext, useCallback, useState } from "react";
 import Context from '../contexts/UserContext';
 import loginService from '../services/login';
+import jwtDecode from "jwt-decode";
 
 export default function useUser(){
     const {jwt,setJwt} = useContext(Context);
-    const [error,setError] = useState(false);
-
+    const [error,setError] = useState({
+        error:'',
+        success:true
+    });
+    const {role,unique_name} = jwt && jwt !== undefined ?jwtDecode(jwt):"";
+    
     const login = useCallback(({username,password}) => {
         loginService({username,password}).then(res => {
             window.sessionStorage.setItem('token',res);
-            setError(false);
+            setError({
+                error:'',
+                success:true
+            });
             setJwt(res);    
         }).catch(err => {
-            setError(true);
-            console.log(err);
+            setError({
+                error:err.response.data,
+                success:false
+            });
         });
     },[setJwt]);
 
     const logout = useCallback(() => {
-        window.localStorage.removeItem('token');
+        window.sessionStorage.removeItem('token');
         setJwt(null);
     },[setJwt]);
 
@@ -26,6 +36,8 @@ export default function useUser(){
         isLogged: Boolean(jwt),
         login,
         logout,
-        error
+        error,
+        role,
+        unique_name
     }
 }

@@ -1,6 +1,6 @@
 import http from "../helpers/http";
 
-const api_module = '/users';
+const api_module = '/usuarios';
 
 const getUsuarios = async () => {
     const {data,status} = await http.get(`${api_module}`);
@@ -25,6 +25,7 @@ const deleteUsuario = async (id) => {
 
     return {data,status};
 }
+
 
 export {
     getUsuarios,

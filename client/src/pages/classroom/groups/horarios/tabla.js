@@ -1,42 +1,25 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Table} from '@themesberg/react-bootstrap'
+import { Table } from '@themesberg/react-bootstrap'
 import { withRouter } from 'react-router-dom';
 // import { Routes } from "../../../routes";
 
 const TablaHorario = (props) => {
-    const {data,onClick, history} = props; 
-    const totalRows = data.length;
+    const { horario, data, handleEdit } = props;
 
-    const handleClick = ({id,operation}) => {
-        onClick({id,operation});
-    }
-    
     const TableRow = (props) => {
-        const {grupo} = props;
-        // const linkTo = Routes.Grupos.children.horarios.replace(/:idGrupo/,grupo.idGroup);
-        return(
+        const { clase } = props;
+        console.log(clase.maestro);
+        return (
             <tr>
-                <td>{grupo.name}</td>
-                <td>{grupo.code}</td>
-                <td>{grupo.speciality}</td>
+                <td>{clase.materia.nombre}</td>
+                <td>{clase.maestro.nombre}</td>
                 <td>
-                    <button className="btn-primary" onClick={() => handleClick({
-                        id:grupo.idGroup,
-                        operation:'edit'
-                    })}>
+                    <button className="btn-primary" onClick={() => { props.onEdit(clase.idClase)}}>
                         editar
                     </button>
-                    {/* <button 
-                    className="btn-secondary"
-                    onClick={() => history.push(linkTo)}>
-                        horarios
-                    </button> */}
-                    <button className="btn-danger" onClick={() => handleClick({
-                        id:grupo.idGroup,
-                        operation:'delete'
-                    })}>
+                    <button className="btn-danger" onClick={() =>{} }>
                         borrar
                     </button>
                 </td>
@@ -44,22 +27,31 @@ const TablaHorario = (props) => {
         );
     }
 
+    const TableHor = (props) => {
+        return (
+            <Table responsive className="table">
+                <thead>
+                    <tr>
+                        <td>Materia</td>
+                        <td>Maestro</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map(d => <TableRow key={d.idMateria} clase={d} onEdit={handleEdit}></TableRow>)}
+                </tbody>
+            </Table>
+        );
+    }
+
     return (
-    <>
-        <Table responsive> 
-            <thead>
-                <tr>
-                    <td>Materia</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                {/* {data.map(d => <TableRow key={d.idGroup} grupo={d}></TableRow>)} */}
-            </tbody>
-        </Table>
-    </>
+        <>
+            {horario ? <TableHor></TableHor>:<span>Arega un horaio</span>
+        
+        }
+        </>
     );
-    
+
 }
 
 TablaHorario.prototype = {

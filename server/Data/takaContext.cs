@@ -52,7 +52,8 @@ namespace server
 
                 entity.Property(e => e.Activo)
                     .HasColumnType("tinyint(4)")
-                    .HasColumnName("activo");
+                    .HasColumnName("activo")
+                    .HasDefaultValue(true);
 
                 entity.Property(e => e.HoraFin)
                     .HasColumnType("time")
@@ -61,10 +62,6 @@ namespace server
                 entity.Property(e => e.HoraInicio)
                     .HasColumnType("time")
                     .HasColumnName("hora_inicio");
-
-                entity.Property(e => e.IdHorario)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("id_horario");
 
                 entity.Property(e => e.IdMaestro)
                     .HasColumnType("int(11)")
@@ -88,9 +85,13 @@ namespace server
                     .WithMany()
                     .HasForeignKey(c => c.IdMaestro);
 
-                entity.HasOne(c => c.Horario)
+                entity.HasOne(c => c.Grupo)
                     .WithMany()
-                    .HasForeignKey(c => c.IdHorario);
+                    .HasForeignKey(c => c.IdGrupo);
+                
+                entity.HasOne(c => c.Periodo)
+                    .WithMany()
+                    .HasForeignKey(c => c.IdPeriodo);
             });
 
             modelBuilder.Entity<Especialidad>(entity =>
@@ -106,7 +107,8 @@ namespace server
 
                 entity.Property(e => e.Activo)
                     .HasColumnType("tinyint(4)")
-                    .HasColumnName("activo");
+                    .HasColumnName("activo")
+                    .HasDefaultValue(true);
 
                 entity.Property(e => e.Codigo)
                     .HasColumnType("varchar(50)")
@@ -135,7 +137,7 @@ namespace server
                 entity.Property(e => e.Activo)
                     .HasColumnType("tinyint(4)")
                     .HasColumnName("activo")
-                    .HasDefaultValueSql("'1'");
+                    .HasDefaultValue(true);
 
                 entity.Property(e => e.Codigo)
                     .HasColumnType("varchar(50)")
@@ -171,7 +173,8 @@ namespace server
 
                 entity.Property(e => e.Activo)
                     .HasColumnType("tinyint(4)")
-                    .HasColumnName("activo");
+                    .HasColumnName("activo")
+                    .HasDefaultValue(true);
 
                 entity.Property(e => e.IdGrupo)
                     .HasColumnType("int(11)")
@@ -206,7 +209,7 @@ namespace server
                 entity.Property(e => e.Activo)
                     .HasColumnType("tinyint(4)")
                     .HasColumnName("activo")
-                    .HasDefaultValueSql("'1'");
+                    .HasDefaultValue(true);
 
                 entity.Property(e => e.Codigo)
                     .HasColumnType("varchar(50)")
@@ -269,6 +272,9 @@ namespace server
 
                 entity.HasIndex(u => u.Email)
                     .IsUnique();
+                
+                entity.HasIndex(u => u.Matricula)
+                    .IsUnique();
 
                 entity.Property(e => e.IdUsuario)
                     .HasColumnType("int(11)")
@@ -276,7 +282,8 @@ namespace server
 
                 entity.Property(e => e.Activo)
                     .HasColumnType("tinyint(4)")
-                    .HasColumnName("activo");
+                    .HasColumnName("activo")
+                    .HasDefaultValue(true);
 
                 entity.Property(e => e.ApellidoMaterno)
                     .HasColumnType("varchar(100)")

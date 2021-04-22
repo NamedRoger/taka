@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using server.Helpers;
 using server.Helpers.Classroom;
 using server.Models;
 
 namespace server.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class GrupoController : ControllerBase
@@ -53,7 +56,7 @@ namespace server.Controllers
                 var especialidad = await context.Especialidades.FindAsync(grupo.IdEspecialidad);
                 if(especialidad == null ) return NotFound("No se encontro la especialidad que quiere asingar");
 
-                grupo.Codigo = "GPO_"+grupo.Nombre.ToUpper().Trim();
+                grupo.Codigo =  Utility.GenerateCode(grupo.Nombre,"gpo");
                 grupo.Activo = true;
                 
                 await context.Grupos.AddAsync(grupo);
@@ -75,7 +78,7 @@ namespace server.Controllers
                 var foundGrupo = await context.Grupos.FindAsync(id);
                 if(foundGrupo == null ) return NotFound("No se encontro el grupo");
 
-                foundGrupo.Codigo = "GPO_"+grupo.Nombre.ToUpper().Trim();
+                foundGrupo.Codigo = Utility.GenerateCode(grupo.Nombre,"gpo");
                 foundGrupo.Nombre = grupo.Nombre;
                 foundGrupo.IdEspecialidad = grupo.IdEspecialidad;
                 
@@ -104,21 +107,24 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        [Route("{idGrupo}/periodo/{idPeriodo}")]
-        public async Task<IEnumerable<Horario>> GetHorariosAsync(int idGrupo, int idPeriodo){
-            var horarios = await context.Horarios.Where(h => h.IdGrupo == idGrupo && h.IdPeriodo == idPeriodo)
-                .ToListAsync();
-            return horarios;
+        [Route("{idGrupo}/periodo/{idPeriodo}/horario")]
+        public async Task<ActionResult<Horario>> GetHorarioAsync(int idGrupo, int idPeriodo){
+            var horario = await context.Horarios.Where(h => h.IdGrupo == idGrupo && h.IdPeriodo == idPeriodo)
+                .SingleOrDefaultAsync();
+            if(horario == null) return NotFound("No existe el horario");
+            return horario;
         }
 
         [HttpPost]
-        [Route("{idGrupo}/periodo/{idPeriodo}")]
-        public async Task<ActionResult<Horario>> AddHorarioAsync(int idGrupo, int idPeriodo,
-        [FromBody] Horario horario){
+        [Route("{idGrupo}/periodo/{idPeriodo}/horario")]
+        public async Task<ActionResult<Horario>> AddHorarioAsync(int idGrupo, int idPeriodo){
             try{
-                await context.Horarios.AddAsync(horario);
-                await context.SaveChangesAsync();
-                return Ok(horario);
+                var grupo = await grupoManager.ObtenerGrupo(idGrupo);
+                var periodo = await grupoManager.ObtenerPeriodo(idPeriodo);
+
+                // await grupoManager.AddHorario(grupo,periodo);
+                return Ok();
+
             }catch(Exception e){
                 return BadRequest(e.Message);
             }

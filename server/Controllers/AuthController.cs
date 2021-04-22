@@ -41,7 +41,7 @@ namespace server.Controllers
                 if (findUsuario == null)
                     return BadRequest("No existe el usuario");
 
-                if (BCrypt.Net.BCrypt.Verify(login.Password, findUsuario.Password))
+                if (!BCrypt.Net.BCrypt.Verify(login.Password, findUsuario.Password))
                     return BadRequest("El password no es el correcto");
 
                 var token = GenerateToken(findUsuario);

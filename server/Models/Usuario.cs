@@ -16,7 +16,7 @@ namespace server.Models
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public string Curp { get; set; }
-        public bool Activo { get; set; }
+        public bool Activo { get; set; } = true;
         public string Matricula { get; set; }
         public int IdRole {get;set;}
         public Role Role {get;set;}

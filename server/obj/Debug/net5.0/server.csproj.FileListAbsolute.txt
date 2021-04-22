@@ -138,7 +138,6 @@ C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\server.run
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\server.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\ref\server.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\server.pdb
-C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\BCrypt.Net-Next.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -258,3 +257,4 @@ C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\server.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\ref\server.dll
 C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\server.pdb
 C:\Users\Rogelio Villarreal\source\repos\taka\server\obj\Debug\net5.0\server.genruntimeconfig.cache
+C:\Users\Rogelio Villarreal\source\repos\taka\server\bin\Debug\net5.0\BCrypt.Net-Core.dll

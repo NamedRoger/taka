@@ -42,10 +42,9 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
   );
 };
 
-const RouteWithSidebar = ({ component: Component, ...rest }) => {
+const RouteWithSidebar = ({ component: Component, roles, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
-  const { isLogged } = useUser();
-
+  const { isLogged, role } = useUser();
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
@@ -63,20 +62,29 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   }
 
   return (
-    <Route {...rest} render={props => isLogged ?
-      <>
-        <Preloader show={loaded ? false : true} />
-        <Sidebar />
+    <Route {...rest} render={props => {
+      if (!isLogged) {
+        return <Redirect to="/login" from={props.location}></Redirect>
+      }
 
-        <main className="content">
-          <Navbar />
-          <Component {...props} />
-          <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
-        </main>
-      </>
-      :
-      <Redirect to='/login'></Redirect>}
-    />
+      if (roles && roles.indexOf(role) === -1) {
+        return <Redirect to="/"></Redirect>
+      }
+
+      return (
+        <>
+          <Preloader show={loaded ? false : true} />
+          <Sidebar />
+
+          <main className="content">
+            <Navbar />
+            <Component {...props} />
+            <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
+          </main>
+        </>
+      );
+
+    }} />
   );
 };
 
@@ -84,7 +92,7 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 const Home = () => {
   return (
     <Container>
-      <h1>Bienvendio</h1>
+      <h1>Bienvendio </h1>
     </Container>
   );
 }
@@ -99,19 +107,18 @@ export default () => (
       <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
       <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
-      <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} />
-      <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+      <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} roles="Administrador,Maestro,Alumno" />
+      <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} roles="Maestro,Alumno" />
 
       {/* pages */}
-      <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} />
-      <RouteWithSidebar exact path={Routes.Materias.path} component={Materias} />
+      <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} roles={["Administrador"]} />
+      <RouteWithSidebar exact path={Routes.Materias.path} component={Materias} roles={["Administrador"]} />
 
       {/* documentation */}
-      <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} />
-      <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} />
-      <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} />
-
-      <RouteWithSidebar exact path={Routes.Usuarios.path} component={Usuarios} />
+      <RouteWithSidebar exact path={Routes.Periodos.path} component={Periodos} roles="Administrador" />
+      <RouteWithSidebar exact path={Routes.Grupos.path} component={Grupos} roles={["Administrador"]} />
+      <RouteWithSidebar exact path={Routes.Grupos.children.horarios} component={Horarios} roles={["Administrador"]} />
+      <RouteWithSidebar exact path={Routes.Usuarios.path} component={Usuarios} roles={["Administrador"]} />
 
 
       <Redirect to={Routes.NotFound.path} />

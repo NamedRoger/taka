@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import HeaderPage from '../../../components/HeaderPage';
 import FormUsuario from './form';
 import * as userService from '../../../services/usuarios';
+import TablaUsuarios from './tabla';
 
 const addUsuario = async () => {
 
@@ -16,15 +17,6 @@ const deleteUsuario = async () => {
 
 }
 
-const getUsuarios = async () => {
-    try{
-        const {} = await userService.getUsuarios();
-
-    }catch(e){
-        console.log(e);
-        return [];
-    }
-}
 
 const Usuarios = () => {
     const userInit = {
@@ -35,16 +27,15 @@ const Usuarios = () => {
     const [usuario,setUsuario] = useState(userInit);
 
     const usersCallback = useCallback(() => {
-        getUsuarios().then(
-            res => {
-                setUsuarios(res);
-            },err => {
-                setUsuarios([]);
-            });
+        userService.getUsuarios().then(res => {
+            setUsuarios(res.data);
+        }).catch(err => console.log(err));
     },[setUsuarios]);
+
     useEffect(() => {
         usersCallback();
-    });
+    },[usersCallback]);
+
     const onSubmit = () => {
 
     }
@@ -65,6 +56,7 @@ const Usuarios = () => {
                 </Col>
             </Row>
             <div className="mt-4">
+                <TablaUsuarios data={usuarios}></TablaUsuarios>
                 {/* <TablaGrupos data={grupos} onClick={onSelect}></TablaGrupos> */}
             </div>
         </Container>

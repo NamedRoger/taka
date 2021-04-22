@@ -5,14 +5,14 @@ import { faBell, faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icon
 import { Row, Col, Nav, Form, Image, Navbar, Dropdown, Container, ListGroup, InputGroup } from '@themesberg/react-bootstrap';
 
 import NOTIFICATIONS_DATA from "../data/notifications";
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+import Profile3 from "../assets/img/team/default-user.png";
 
 import useUser from '../hooks/useUser';
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
-  const {logout} = useUser();
+  const {logout,unique_name} = useUser();
 
 
   const markNotificationsAsRead = () => {
@@ -89,7 +89,7 @@ export default (props) => {
                 <div className="media d-flex align-items-center">
                   <Image src={Profile3} className="user-avatar md-avatar rounded-circle" />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span className="mb-0 font-small fw-bold">Bonnie Green</span>
+                    <span className="mb-0 font-small fw-bold">{unique_name}</span>
                   </div>
                 </div>
               </Dropdown.Toggle>

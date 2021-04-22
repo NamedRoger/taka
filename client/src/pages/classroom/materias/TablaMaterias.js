@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {Table} from '@themesberg/react-bootstrap'
 
 const TablaEspecialidad = (props) => {
-    console.log(props);
     const {data,onSelect} = props; 
     const totalRows = data.length;
 
@@ -13,6 +12,7 @@ const TablaEspecialidad = (props) => {
         return(
             <tr>
                 <td>{data.nombre}</td>
+                <td>{data.codigo}</td>
                 <td>
                     <button className="btn-primary"
                     onClick={() => {

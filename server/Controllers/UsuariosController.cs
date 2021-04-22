@@ -29,7 +29,7 @@ namespace server.Controllers
         [HttpGet]
         public async Task<IEnumerable<Usuario>> Get()
         {
-            var usuarios = await context.Usuarios.ToListAsync();
+            var usuarios = await context.Usuarios.Include(u => u.Role).ToListAsync();
             usuarios.ForEach(u => u.Password = null);
             return  usuarios;
         }
@@ -58,15 +58,25 @@ namespace server.Controllers
 
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] string value)
         {
+            try{
+                return NoContent();
+            }catch(Exception e){
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Desactive(int id)
         {
-            
+            try{
+
+                return NoContent();
+            }catch(Exception e){
+                return BadRequest(e.Message);
+            }
         }
     }
 }

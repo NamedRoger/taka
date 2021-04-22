@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using server.Helpers;
 using server.Models;
 
 namespace server.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class EspecialidadController : ControllerBase
@@ -41,7 +44,7 @@ namespace server.Controllers
         {
             try
             {
-                especialidad.Codigo = "ESP_" + especialidad.Nombre.ToUpper();
+                especialidad.Codigo =  Utility.GenerateCode(especialidad.Nombre,"esp");
                 especialidad.Activo = true;
                 await context.Especialidades.AddAsync(especialidad);
                 await context.SaveChangesAsync();
@@ -62,7 +65,7 @@ namespace server.Controllers
                 var foundEspecialidad = await context.Especialidades.FindAsync(id);
                 if (foundEspecialidad == null) return NotFound("No se encontro con la especialidad");
 
-                foundEspecialidad.Codigo = "ESP_" + especialidad.Nombre.ToUpper().Trim();
+                foundEspecialidad.Codigo = Utility.GenerateCode(especialidad.Nombre,"esp");
                 foundEspecialidad.Nombre = especialidad.Nombre;
 
                 await context.SaveChangesAsync();

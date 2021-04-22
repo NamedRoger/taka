@@ -15,10 +15,11 @@ namespace server.Models
         public Usuario Maestro {get;set;}
         public TimeSpan? HoraInicio { get; set; }
         public TimeSpan? HoraFin { get; set; }
-        public sbyte? Activo { get; set; }
-        public int? IdHorario { get; set; }
-        public Horario Horario {get;set;}
-
+        public bool Activo { get; set; } = true;
+        public int IdGrupo {get;set;}
+        public Grupo Grupo {get;set;}
+        public int IdPeriodo {get;set;}
+        public Periodo Periodo {get;set;}
         public ICollection<Usuario> Alumnos {get;set;}
         public List<ClaseAlumno> ClaseAlumnos {get;set;}
     }

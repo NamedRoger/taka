@@ -10,5 +10,6 @@ namespace server.Helpers.Alumno
         Task RemoveToClass(Usuario usuario, Clase clase);
         Task AddHorario(Usuario usuario, Horario horario);
         Task AddCalification(Usuario usuario, Clase clase,TypeCalificacion typeCalificacion);
+        Task<bool> ExistMatricula(string matricula);
     }
 }

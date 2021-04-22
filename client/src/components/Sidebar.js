@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Routes } from "../routes";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
+import useUser from "../hooks/useUser";
 
 export default (props = {}) => {
 
@@ -18,6 +19,8 @@ export default (props = {}) => {
   const { pathname } = location;
   const [show, setShow] = useState(false);
   const showClass = show ? "show" : "";
+  const { unique_name, role, logout} = useUser();
+
 
   const onCollapse = () => setShow(!show);
 
@@ -25,6 +28,9 @@ export default (props = {}) => {
     const { eventKey, title, icon, children = null } = props;
     const defaultKey = pathname.indexOf(eventKey) !== -1 ? eventKey : "";
 
+    if(props.roles && props.roles.indexOf(role) === -1)
+      return <></>;
+    
     return (
       <Accordion as={Nav.Item} defaultActiveKey={defaultKey}>
         <Accordion.Item eventKey={eventKey}>
@@ -50,6 +56,9 @@ export default (props = {}) => {
     const navItemClassName = link === pathname ? "active" : "";
     const linkProps = external ? { href: link } : { as: Link, to: link };
 
+    if(props.roles && props.roles.indexOf(role) === -1)
+      return <></>;
+    
     return (
       <Nav.Item className={navItemClassName} onClick={() => setShow(false)}>
         <Nav.Link {...linkProps} target={target} className={classNames}>
@@ -83,11 +92,11 @@ export default (props = {}) => {
             <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
               <div className="d-flex align-items-center">
                 <div className="user-avatar lg-avatar me-4">
-                  <Image src={ProfilePicture} className="card-img-top rounded-circle border-white" />
+                  {/* <Image src={ProfilePicture} className="card-img-top rounded-circle border-white" /> */}
                 </div>
                 <div className="d-block">
-                  <h6>Hi, Jane</h6>
-                  <Button as={Link} variant="secondary" size="xs" to={Routes.Signin.path} className="text-dark">
+                  <h6>Hi, {unique_name}</h6>
+                  <Button onClick={() => logout()} variant="secondary" size="xs" to={Routes.Signin.path} className="text-dark">
                     <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Sign Out
                   </Button>
                 </div>
@@ -99,18 +108,18 @@ export default (props = {}) => {
             <Nav className="flex-column pt-3 pt-md-0">
               <NavItem title="Taka" link={Routes.Presentation}  image={ReactHero} />
 
-              <NavItem title="Tablero" link={Routes.DashboardOverview.path} icon={faChalkboard} />
+              <NavItem title="Tablero" link={Routes.DashboardOverview.path} icon={faChalkboard} roles={["Maestro","Alumno"]}/>
 
 
-              <CollapsableNavItem eventKey="classroom/" title="Classroom" icon={faChalkboardTeacher}>
-                <NavItem title="Periodos" link={Routes.Periodos.path} />
-                <NavItem title="Especialidades" link={Routes.Especialidad.path} />
-                <NavItem title="Materias" link={Routes.Materias.path} />
+              <CollapsableNavItem eventKey="classroom/" title="Classroom" icon={faChalkboardTeacher} roles={["Administrador"]}>
+                <NavItem title="Periodos" link={Routes.Periodos.path}/>
+                <NavItem title="Especialidades" link={Routes.Especialidad.path}/>
+                <NavItem title="Materias" link={Routes.Materias.path}  />
                 <NavItem title="Grupos" link={Routes.Grupos.path} />
 
               </CollapsableNavItem>
 
-              <CollapsableNavItem eventKey="administracion/" title="Administracion" icon={faUserCog}>
+              <CollapsableNavItem eventKey="administracion/" title="Administracion" icon={faUserCog} roles={["Administrador"]}>
                 <NavItem title="Usuarios" link={Routes.Usuarios.path} />
               </CollapsableNavItem>
 

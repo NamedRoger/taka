@@ -12,7 +12,7 @@ namespace server.Models
         public Grupo Grupo {get;set;}
         public int IdPeriodo { get; set; }
         public Periodo Periodo {get;set;}
-        public sbyte? Activo { get; set; }
+        public bool Activo { get; set; } = true;
 
         public ICollection<Usuario> Alumnos {get;set;}
     }

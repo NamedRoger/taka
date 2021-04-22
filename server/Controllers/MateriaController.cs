@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using server.Helpers;
 using server.Models;
 
 namespace server.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class MateriaController : ControllerBase
@@ -40,7 +43,7 @@ namespace server.Controllers
         public async Task<ActionResult<Materia>> Post([FromBody] Materia materia)
         {
             try{
-                materia.Codigo = "MAT_"+materia.Nombre.ToUpper().Trim();
+                materia.Codigo = Utility.GenerateCode(materia.Nombre,"mat");
                 await context.Materias.AddAsync(materia);
                 await context.SaveChangesAsync();
 
@@ -58,7 +61,7 @@ namespace server.Controllers
                 var foundMateria = await context.Materias.FindAsync(id);
                 if(foundMateria == null) return NotFound("No se encontró la materia");
 
-                foundMateria.Codigo = "MAT_"+materia.Nombre.ToUpper().Trim();
+                foundMateria.Codigo = Utility.GenerateCode(materia.Nombre,"mat");
                 foundMateria.Nombre = materia.Nombre.Trim();
                 await context.SaveChangesAsync();
                 return NoContent();

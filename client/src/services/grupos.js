@@ -30,9 +30,21 @@ const deleteGrupo = async (idGrupo) => {
     return {data,status};
 }
 
+
+const getHorario = (idGrupo,idPeriodo) => {
+    return http.get(`${api_module}/${idGrupo}/periodo/${idPeriodo}/horario`);
+   
+}
+
+const addHorario =  (idGrupo,idPeriodo) => {
+    return http.post(`${api_module}/${idGrupo}/periodo/${idPeriodo}/horario`);
+}
+
 export {
     getGrupos,
     deleteGrupo,
     updateGrupo,
-    addGrupo
+    addGrupo,
+    addHorario,
+    getHorario
 }

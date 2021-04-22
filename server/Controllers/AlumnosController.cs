@@ -11,36 +11,11 @@ namespace server.Controllers
     [ApiController]
     public class AlumnosController : ControllerBase
     {
-        // GET: api/Alumnos
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly takaContext context;
 
-        // GET: api/Alumnos/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        public AlumnosController(takaContext context)
         {
-            return "value";
-        }
-
-        // POST: api/Alumnos
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Alumnos/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Alumnos/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            this.context = context;
         }
     }
 }
