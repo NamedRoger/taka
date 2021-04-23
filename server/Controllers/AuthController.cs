@@ -64,6 +64,7 @@ namespace server.Controllers
             {
                 new Claim(ClaimTypes.Name,usuario.UserName),
                 new Claim(ClaimTypes.Role,usuario.Role.Nombre),
+                new Claim(ClaimTypes.PrimarySid,usuario.IdUsuario.ToString())
             };
 
             var claimIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);

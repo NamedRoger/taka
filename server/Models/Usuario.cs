@@ -23,6 +23,5 @@ namespace server.Models
 
         public ICollection<Clase> Clases {get;set;}
         public List<ClaseAlumno> ClaseAlumnos {get;set;}
-        public ICollection<Horario> Horarios {get;set;}
     }
 }

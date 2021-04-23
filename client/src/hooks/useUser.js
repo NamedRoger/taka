@@ -9,8 +9,8 @@ export default function useUser(){
         error:'',
         success:true
     });
-    const {role,unique_name} = jwt && jwt !== undefined ?jwtDecode(jwt):"";
-    
+    const {role,unique_name, primarysid} = jwt && jwt !== undefined ?jwtDecode(jwt):"";
+
     const login = useCallback(({username,password}) => {
         loginService({username,password}).then(res => {
             window.sessionStorage.setItem('token',res);
@@ -38,6 +38,7 @@ export default function useUser(){
         logout,
         error,
         role,
-        unique_name
+        unique_name,
+        primarysid
     }
 }

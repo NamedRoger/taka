@@ -10,7 +10,7 @@ using server.Models;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Maestro,Alumno")]
     [Route("api/[controller]")]
     [ApiController]
     public class PeriodoController : ControllerBase
@@ -38,6 +38,7 @@ namespace server.Controllers
         }
 
         // POST: api/Periodo
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<ActionResult<Periodo>> Post([FromBody] Periodo periodo)
         {
@@ -55,6 +56,7 @@ namespace server.Controllers
         }
 
         // PUT: api/Periodo/5
+        [Authorize(Roles = "Administrador")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Periodo periodo)
         {
@@ -74,6 +76,7 @@ namespace server.Controllers
         }
 
         // DELETE: api/Periodo/5
+        [Authorize(Roles = "Administrador")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

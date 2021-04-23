@@ -14,7 +14,7 @@ const TablaHorario = (props) => {
         return (
             <tr>
                 <td>
-                    <Link to={`/classroom/grupos/${clase.idGrupo}/clase/${clase.idClase}`} href>{clase.materia.nombre}</Link> 
+                    <Link to={`/classroom/grupos/${clase.idGrupo}/periodo/${clase.idPeriodo}/clase/${clase.idClase}`} href>{clase.materia.nombre}</Link> 
                 </td>
                 <td>{clase.maestro.nombre}</td>
                 <td>

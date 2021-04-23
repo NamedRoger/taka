@@ -6,6 +6,11 @@ const getMaestros = () => {
     return http.get(`${api_module}/`);
 }
 
+const getClases = (idMaestro,idPeriodo) => {
+    return http.get(`${api_module}/${idMaestro}/periodo/${idPeriodo}/clases`);
+}
+
 export {
-    getMaestros
+    getMaestros,
+    getClases
 }

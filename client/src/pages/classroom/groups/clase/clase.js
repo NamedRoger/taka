@@ -4,16 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import TablaAlumnos from './tabla-alumnos';
-import * as clasesService from '../../../../services/clases';
+import * as horariosService from '../../../../services/horarios';
 
 
 const Clase = ({ match }) => {
-    const { idGrupo,idClase } = match.params;
+    const { idGrupo,idPeriodo,idClase } = match.params;
     const [data,setData] = useState([]);
 
     const getAlumnos = useCallback(() => {
-        clasesService.getAlumnos(idClase).then(res => setData(res.data.claseAlumnos));
-    },[idClase]);
+        horariosService.getClase(idGrupo,idPeriodo,idClase).then(res => setData(res.data.claseAlumnos));
+    },[idClase, idGrupo, idPeriodo]);
 
     useEffect(() => {
         getAlumnos();

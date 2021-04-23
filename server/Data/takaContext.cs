@@ -23,7 +23,6 @@ namespace server
         public virtual DbSet<Clase> Clases { get; set; }
         public virtual DbSet<Especialidad> Especialidades { get; set; }
         public virtual DbSet<Grupo> Grupos { get; set; }
-        public virtual DbSet<Horario> Horarios { get; set; }
         public virtual DbSet<Materia> Materias { get; set; }
         public virtual DbSet<Periodo> Periodos { get; set; }
         public virtual DbSet<Usuario> Usuarios {get;set;}
@@ -159,41 +158,6 @@ namespace server
                     .WithMany()
                     .HasForeignKey(g => g.IdEspecialidad);
             });
-
-            modelBuilder.Entity<Horario>(entity =>
-            {
-                entity.HasKey(e => e.IdHorario)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("horario");
-
-                entity.Property(e => e.IdHorario)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("id_horario");
-
-                entity.Property(e => e.Activo)
-                    .HasColumnType("tinyint(4)")
-                    .HasColumnName("activo")
-                    .HasDefaultValue(true);
-
-                entity.Property(e => e.IdGrupo)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("id_grupo");
-
-                entity.Property(e => e.IdPeriodo)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("id_periodo");
-
-                entity.HasOne(h => h.Grupo)
-                    .WithMany()
-                    .HasForeignKey(h => h.IdGrupo);
-
-                entity.HasOne(h => h.Periodo)
-                    .WithMany()
-                    .HasForeignKey(h => h.IdPeriodo);
-
-            });
-
 
             modelBuilder.Entity<Materia>(entity =>
             {

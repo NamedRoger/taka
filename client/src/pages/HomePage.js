@@ -29,6 +29,7 @@ import { UserContext } from '../contexts/UserContext';
 import useUser from '../hooks/useUser';
 import Usuarios from './admin/usuarios/usuarios';
 import Clase from './classroom/groups/clase/clase';
+import Tablero from './dashboard/tablero';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -65,7 +66,7 @@ const RouteWithSidebar = ({ component: Component, roles, ...rest }) => {
   return (
     <Route {...rest} render={props => {
       if (!isLogged) {
-        return <Redirect to="/login" from={props.location}></Redirect>
+        return <Redirect to="/login"></Redirect>
       }
 
       if (roles && roles.indexOf(role) === -1) {
@@ -109,7 +110,7 @@ export default () => (
       <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
       <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} roles="Administrador,Maestro,Alumno" />
-      <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} roles="Maestro,Alumno" />
+      <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={Tablero} roles="Maestro,Alumno" />
 
       {/* pages */}
       <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} roles={["Administrador"]} />
