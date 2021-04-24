@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using server;
 
 namespace server.Data.Migrations
 {
     [DbContext(typeof(takaContext))]
-    partial class takaContextModelSnapshot : ModelSnapshot
+    [Migration("20210424013940_add clasesAlumos dataSet")]
+    partial class addclasesAlumosdataSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

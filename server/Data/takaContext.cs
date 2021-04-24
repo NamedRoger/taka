@@ -27,6 +27,7 @@ namespace server
         public virtual DbSet<Periodo> Periodos { get; set; }
         public virtual DbSet<Usuario> Usuarios {get;set;}
         public virtual DbSet<Role> Roles {get;set;}
+        public virtual DbSet<ClaseAlumno> ClaseAlumnos {get;set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -307,6 +308,16 @@ namespace server
                         }
                     );   
 
+            });
+
+            modelBuilder.Entity<ClaseAlumno>(entity => {
+                entity.HasOne(ca => ca.Alumno)
+                .WithMany(a => a.ClaseAlumnos)
+                .HasForeignKey(ca => ca.IdAlumno);
+
+                entity.HasOne(ca => ca.Clase)
+                .WithMany(a => a.ClaseAlumnos)
+                .HasForeignKey(ca => ca.IdClase);
             });
 
             OnModelCreatingPartial(modelBuilder);

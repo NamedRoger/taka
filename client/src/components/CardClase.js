@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card } from '@themesberg/react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const CardClase = ({ grupo, clase, maestro, className }) => {
+const CardClase = ({ grupo, clase, maestro, className,href }) => {
     return (
         <>
             <Card bg="light"
@@ -10,7 +11,9 @@ const CardClase = ({ grupo, clase, maestro, className }) => {
                 className={className}>
                 <Card.Header>{grupo}</Card.Header>
                 <Card.Body>
-                    <Card.Title>{clase}</Card.Title>
+                    <Link to={href}>
+                        <Card.Title>{clase}</Card.Title>
+                    </Link> 
                     <Card.Text>
                         {maestro}
                     </Card.Text>

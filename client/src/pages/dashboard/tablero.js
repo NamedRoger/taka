@@ -6,6 +6,7 @@ import { ROLES } from '../../consts';
 import HeaderPage from '../../components/HeaderPage';
 import * as periodosService from '../../services/periodos';
 import CardClase from '../../components/CardClase';
+import * as claseService from '../../services/clases';
 
 const Tablero = () => {
     const {primarysid,role} = useUser();
@@ -17,9 +18,9 @@ const Tablero = () => {
         periodosService.getPeriodos().then(res => setPeriodos(res));
     }
 
-    const getClasesAlumno = () => {
-
-    }
+    const getClasesAlumno = useCallback(() => {
+        claseService.getClases(idPeriodo,Number(primarysid)).then(res => setClases(res.data));
+    },[idPeriodo, primarysid]);
 
     const getClasesMaestro = useCallback(() => {
         const idMaestro = Number(primarysid);
@@ -32,7 +33,7 @@ const Tablero = () => {
         }else{
             getClasesAlumno();
         }
-    },[getClasesMaestro, role]);
+    },[getClasesAlumno, getClasesMaestro, role]);
 
     useEffect(() => {
         getPeriodos();
@@ -60,7 +61,8 @@ const Tablero = () => {
                     clase={c.nombre}
                     grupo={c.grupo.nombre}
                     maestro={`${c.maestro.nombre} ${c.maestro.apellidoPaterno} ${c.maestro.apellidoMaterno}`} 
-                    className="m-2"></CardClase>
+                    className="m-2"
+                    href={`/tablero/periodo/${idPeriodo}/clase/${c.idClase}`}></CardClase>
                 )}
             </Row>
         </Container>

@@ -22,7 +22,6 @@ import Preloader from "../components/Preloader";
 import Periodos from './classroom/periods/periods';
 import Grupos from './classroom/groups/grupos';
 import Horarios from './classroom/groups/horarios/horarios';
-import DashboardOverview from './classroom/students/DashboardOverview';
 import { Container } from '@themesberg/react-bootstrap';
 
 import { UserContext } from '../contexts/UserContext';
@@ -30,6 +29,7 @@ import useUser from '../hooks/useUser';
 import Usuarios from './admin/usuarios/usuarios';
 import Clase from './classroom/groups/clase/clase';
 import Tablero from './dashboard/tablero';
+import ClaseTablero from './dashboard/clase/clase';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -110,7 +110,9 @@ export default () => (
       <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
       <RouteWithSidebar exact path={Routes.Presentation.path} component={Home} roles="Administrador,Maestro,Alumno" />
+
       <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={Tablero} roles="Maestro,Alumno" />
+      <RouteWithSidebar exact path={Routes.DashboardOverview.children.clase} component={ClaseTablero} roles="Maestro,Alumno" />
 
       {/* pages */}
       <RouteWithSidebar exact path={Routes.Especialidad.path} component={Especialidad} roles={["Administrador"]} />

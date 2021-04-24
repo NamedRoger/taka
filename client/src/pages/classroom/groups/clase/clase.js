@@ -3,7 +3,7 @@ import { Col, Row, Container } from '@themesberg/react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
-import TablaAlumnos from './tabla-alumnos';
+import TablaAlumnos from '../../../../components/tabla-alumnos';
 import * as horariosService from '../../../../services/horarios';
 
 

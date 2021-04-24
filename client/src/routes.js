@@ -2,7 +2,9 @@
 export const Routes = {
     // pages
     Presentation: { path: "/" },
-    DashboardOverview: { path: "/tablero" },
+    DashboardOverview: { path: "/tablero",children: {
+        clase:'/tablero/periodo/:idPeriodo/clase/:idClase'
+    }},
     Transactions: { path: "/transactions" },
     Settings: { path: "/settings" },
     Upgrade: { path: "/upgrade" },
