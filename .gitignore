@@ -16,6 +16,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+### Electron ###
+build/
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -201,7 +204,8 @@ artifacts/
 *.log
 *.vspscc
 *.vssscc
-.builds
+.build
+.build
 *.pidb
 *.svclog
 *.scc
